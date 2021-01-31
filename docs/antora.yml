@@ -1,5 +1,5 @@
-name: quarkiverse-project
-title: Quarkiverse <YOUR_PROJECT>
+name: quarkus-unleash
+title: Quarkus Unleash Extension
 version: dev
 nav:
   - modules/ROOT/nav.adoc
