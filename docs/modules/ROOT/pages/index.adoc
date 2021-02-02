@@ -1,22 +1,47 @@
 = Your Quarkiverse Extension
 :extension-status: preview
 
-Describe what the extension does here.
+link:{unleash-root-url}[Unleash] is a feature toggle system, that gives you a great overview of all feature toggles across all your applications and services.
+Quarkus Unleash extension is client for Unleash.
 
 == Installation
 
-If you want to use this extension, you need to add the `quarkiverse-<YOUR_EXTENSION>` extension first.
+If you want to use this extension, you need to add the `quarkiverse-unleash` extension first.
 In your `pom.xml` file, add:
 
 [source,xml]
 ----
 <dependency>
-    <groupId>io.quarkiverse</groupId>
-    <artifactId>quarkiverse-freemarker</artifactId>
+    <groupId>io.quarkiverse.unleash</groupId>
+    <artifactId>quarkus-unleash</artifactId>
+    <version>{quarkus-unleash-version}</version>
 </dependency>
 ----
 
-[[extension-configuration-reference]]
-== Extension Configuration Reference
+== Usage
+Assuming you have Unleash running on localhost:4242 you should add the following properties to your application.properties
+and fill in the values for url.
 
-include::config.adoc[leveloffset=+1, opts=optional]
+[source,properties]
+----
+quarkus.unleash.url=http://localhost:4242/api
+quarkus.unleash.app-name=my-unleash-app
+----
+Once you have configured the properties, you can start using an Unleash-client.
+
+[source,java]
+----
+@ApplicationScoped
+public class TestService {
+
+    @Inject
+    Unleash unleash;
+
+    public boolean isTest() {
+        return unleash.isEnabled("quarkus.unleash.test");
+    }
+}
+----
+
+== Extension Configuration Reference
+include::includes/quarkus-unleash.adoc[leveloffset=+1, opts=optional]

@@ -1,0 +1,118 @@
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[quarkus-unleash_configuration]]link:#quarkus-unleash_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.url]]`link:#quarkus-unleash_quarkus.unleash.url[quarkus.unleash.url]`
+
+[.description]
+--
+Unleash URL service endpoint
+--|string 
+|required icon:exclamation-circle[title=Configuration property is required]
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.app-name]]`link:#quarkus-unleash_quarkus.unleash.app-name[quarkus.unleash.app-name]`
+
+[.description]
+--
+Application name
+--|string 
+|required icon:exclamation-circle[title=Configuration property is required]
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.instance-id]]`link:#quarkus-unleash_quarkus.unleash.instance-id[quarkus.unleash.instance-id]`
+
+[.description]
+--
+Instance ID.
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.disable-metrics]]`link:#quarkus-unleash_quarkus.unleash.disable-metrics[quarkus.unleash.disable-metrics]`
+
+[.description]
+--
+Disable Unleash metrics
+--|boolean 
+|`false`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.token]]`link:#quarkus-unleash_quarkus.unleash.token[quarkus.unleash.token]`
+
+[.description]
+--
+Application Unleash token
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.environment]]`link:#quarkus-unleash_quarkus.unleash.environment[quarkus.unleash.environment]`
+
+[.description]
+--
+Application environment
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.project-name]]`link:#quarkus-unleash_quarkus.unleash.project-name[quarkus.unleash.project-name]`
+
+[.description]
+--
+Project name
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.fetch-toggles-interval]]`link:#quarkus-unleash_quarkus.unleash.fetch-toggles-interval[quarkus.unleash.fetch-toggles-interval]`
+
+[.description]
+--
+Fetch toggles interval
+--|long 
+|`10`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.send-metrics-interval]]`link:#quarkus-unleash_quarkus.unleash.send-metrics-interval[quarkus.unleash.send-metrics-interval]`
+
+[.description]
+--
+Send metrics interval
+--|long 
+|`60`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.backup-file]]`link:#quarkus-unleash_quarkus.unleash.backup-file[quarkus.unleash.backup-file]`
+
+[.description]
+--
+Backup file
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.synchronous-fetch-on-initialisation]]`link:#quarkus-unleash_quarkus.unleash.synchronous-fetch-on-initialisation[quarkus.unleash.synchronous-fetch-on-initialisation]`
+
+[.description]
+--
+A synchronous fetch on initialisation
+--|boolean 
+|`false`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.enable-proxy-authentication-by-jvm-properties]]`link:#quarkus-unleash_quarkus.unleash.enable-proxy-authentication-by-jvm-properties[quarkus.unleash.enable-proxy-authentication-by-jvm-properties]`
+
+[.description]
+--
+Enable proxy authentication by JVM properties
+--|boolean 
+|`false`
+
+|===
