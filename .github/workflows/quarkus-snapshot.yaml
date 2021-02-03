@@ -1,11 +1,10 @@
 name: "Quarkus ecosystem CI"
 on:
-  workflow_dispatch:
   watch:
     types: [started]
 
-# For this CI to work, ECOSYSTEM_CI_TOKEN needs to contain a GitHub with rights to close the Quarkus issue that the user/bot has opened,
- # while 'ECOSYSTEM_CI_REPO_PATH' needs to be set to the corresponding path in the 'quarkusio/quarkus-ecosystem-ci' repository
+  # For this CI to work, ECOSYSTEM_CI_TOKEN needs to contain a GitHub with rights to close the Quarkus issue that the user/bot has opened,
+  # while 'ECOSYSTEM_CI_REPO_PATH' needs to be set to the corresponding path in the 'quarkusio/quarkus-ecosystem-ci' repository
 
 env:
   ECOSYSTEM_CI_REPO: quarkusio/quarkus-ecosystem-ci
@@ -22,7 +21,6 @@ jobs:
   build:
     name: "Build against latest Quarkus snapshot"
     runs-on: ubuntu-latest
-    # Allow <ADMIN> to manually launch the ecosystem CI in addition to the bots
     if: github.actor == 'quarkusbot' || github.actor == 'quarkiversebot'
 
     steps:
