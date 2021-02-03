@@ -1,4 +1,5 @@
-= Your Quarkiverse Extension
+include::./includes/attributes.adoc[]
+= Quarkus - Unleash
 :extension-status: preview
 
 link:{unleash-root-url}[Unleash] is a feature toggle system, that gives you a great overview of all feature toggles across all your applications and services.
