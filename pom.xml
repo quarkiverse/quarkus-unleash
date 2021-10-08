@@ -23,7 +23,7 @@
         <quarkus.version>1.13.5.Final</quarkus.version>
         <testcontainers.version>1.15.3</testcontainers.version>
         <unleash.version>4.2.1</unleash.version>
-        <jandex-plugin.version>1.0.8</jandex-plugin.version>
+        <jandex-plugin.version>1.2.1</jandex-plugin.version>
         <resource-plugin.version>3.2.0</resource-plugin.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     </properties>
