@@ -1,21 +1,15 @@
 package io.quarkiverse.unleash.runtime;
 
-import no.finn.unleash.DefaultUnleash;
-import no.finn.unleash.Unleash;
-import no.finn.unleash.util.UnleashConfig;
+import io.getunleash.DefaultUnleash;
+import io.getunleash.Unleash;
+import io.getunleash.util.UnleashConfig;
 
 public class UnleashCreator {
 
-    private final UnleashRuntimeTimeConfig unleashRuntimeTimeConfig;
-
-    public UnleashCreator(UnleashRuntimeTimeConfig unleashRuntimeTimeConfig) {
-        this.unleashRuntimeTimeConfig = unleashRuntimeTimeConfig;
-    }
-
-    public Unleash createUnleash() {
+    public static Unleash createUnleash(UnleashRuntimeTimeConfig unleashRuntimeTimeConfig, String name) {
         UnleashConfig.Builder builder = UnleashConfig.builder()
                 .unleashAPI(unleashRuntimeTimeConfig.url)
-                .appName(unleashRuntimeTimeConfig.appName);
+                .appName(name);
 
         unleashRuntimeTimeConfig.instanceId.ifPresent(builder::instanceId);
         unleashRuntimeTimeConfig.token.ifPresent(s -> builder.customHttpHeader("Authorization", s));

@@ -3,6 +3,7 @@ package io.quarkiverse.unleash.it;
 import java.util.Collections;
 import java.util.Map;
 
+import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -24,10 +25,15 @@ public class UnleashResource implements QuarkusTestResourceLifecycleManager {
             .withUsername("unleash")
             .withPassword("unleash");
 
-    GenericContainer<?> unleash = new GenericContainer<>("unleashorg/unleash-server:3.10.1")
+    GenericContainer<?> unleash = new GenericContainer<>("unleashorg/unleash-server:4.2.2")
             .withNetwork(network)
+            .withEnv("DATABASE_SSL", "false")
+            .withEnv("LOG_LEVEL", "info")
+            .withEnv("AUTH_TYPE", "none")
+            .withEnv("IMPORT_FILE", "/tmp/unleash-export.yml")
             .withEnv("DATABASE_URL", "postgres://unleash:unleash@postgresql:5432/unleash")
             .withLogConsumer(ContainerLogger.create("unleash"))
+            .withClasspathResourceMapping("unleash-export.yml", "/tmp/unleash-export.yml", BindMode.READ_ONLY)
             .withExposedPorts(UNLEASH_PORT)
             .waitingFor(Wait.forLogMessage(".*Unleash has started.*\\s", 1));
 
