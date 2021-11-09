@@ -19,14 +19,15 @@ In your `pom.xml` file, add:
 ----
 
 == Usage
-Assuming you have Unleash running on localhost:4242 you should add the following properties to your application.properties
-and fill in the values for url.
+
+Assuming you have Unleash running on localhost:4242 you should add the following properties to your application.properties and fill in the values for url.
 
 [source,properties]
 ----
 quarkus.unleash.url=http://localhost:4242/api
 quarkus.unleash.app-name=my-unleash-app
 ----
+
 Once you have configured the properties, you can start using an Unleash-client.
 
 [source,java]
@@ -44,4 +45,5 @@ public class TestService {
 ----
 
 == Extension Configuration Reference
-include::includes/quarkus-unleash.adoc[leveloffset=+1, opts=optional]
+
+include::includes/quarkus-unleash.adoc[leveloffset=+1,opts=optional]

@@ -1,0 +1,33 @@
+version: "2"
+services:
+  unleash-db:
+    container_name: unleash-db
+    image: postgres:12
+    environment:
+      POSTGRES_DB: "unleash"
+      POSTGRES_USER: "unleash"
+      POSTGRES_PASSWORD: "unleash"
+    ports:
+      - "5432:5432"
+    networks:
+      - unleash
+  unleash:
+    container_name: unleash
+    image: unleashorg/unleash-server:4.2.2
+    environment:
+      DATABASE_URL: "postgres://unleash:unleash@unleash-db:5432/unleash"
+      DATABASE_SSL: "false"
+      LOG_LEVEL: "info"
+      IMPORT_FILE: /tmp/unleash-export.yml
+      AUTH_TYPE: "none"
+    volumes:
+      - ./unleash-export.yml:/tmp/unleash-export.yml
+
+    ports:
+      - "4242:4242"
+    depends_on:
+      - unleash-db
+    networks:
+      - unleash
+networks:
+  unleash:

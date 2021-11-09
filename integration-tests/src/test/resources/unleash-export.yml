@@ -1,0 +1,63 @@
+version: 3
+features:
+  - name: quarkus-unleash-test-enabled
+    description: ''
+    type: release
+    project: default
+    stale: false
+    variants: [ ]
+    createdAt: 2021-11-08T21:01:25.727Z
+    lastSeenAt: null
+  - name: quarkus-unleash-test-disabled
+    description: ''
+    type: release
+    project: default
+    stale: false
+    variants: [ ]
+    createdAt: 2021-11-08T21:01:37.477Z
+    lastSeenAt: null
+strategies: [ ]
+projects: [ ]
+tagTypes: [ ]
+tags: [ ]
+featureTags: [ ]
+featureStrategies:
+  - id: 6da0a56f-f749-4e83-b10e-501e709d309d
+    featureName: quarkus-unleash-test-enabled
+    projectId: default
+    environment: default
+    strategyName: default
+    parameters: { }
+    constraints: [ ]
+    createdAt: 2021-11-08T21:01:25.742Z
+  - id: f376e70f-3bd9-47d8-8ba8-b02005f1060b
+    featureName: quarkus-unleash-test-disabled
+    projectId: default
+    environment: default
+    strategyName: default
+    parameters: { }
+    constraints: [ ]
+    createdAt: 2021-11-08T21:01:37.486Z
+environments:
+  - name: default
+    type: production
+    sortOrder: 1
+    enabled: true
+    protected: true
+  - name: development
+    type: development
+    sortOrder: 100
+    enabled: true
+    protected: false
+  - name: production
+    type: production
+    sortOrder: 200
+    enabled: true
+    protected: false
+featureEnvironments:
+  - enabled: true
+    featureName: quarkus-unleash-test-enabled
+    environment: default
+  - enabled: false
+    featureName: quarkus-unleash-test-disabled
+    environment: default

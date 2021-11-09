@@ -1,14 +1,15 @@
 package io.quarkiverse.unleash.runtime;
 
-import io.quarkus.arc.runtime.BeanContainer;
+import io.quarkus.arc.Arc;
+import io.quarkus.runtime.ApplicationConfig;
 import io.quarkus.runtime.annotations.Recorder;
 
 @Recorder
 public class UnleashRecorder {
 
-    public void initializeProducers(BeanContainer container, UnleashRuntimeTimeConfig config) {
-        UnleashProducer producer = container.instance(UnleashProducer.class);
-        producer.initialize(config);
+    public void initializeProducers(UnleashRuntimeTimeConfig config, ApplicationConfig appConfig) {
+        UnleashService producer = Arc.container().instance(UnleashService.class).get();
+        producer.initialize(config, appConfig);
     }
 
 }
