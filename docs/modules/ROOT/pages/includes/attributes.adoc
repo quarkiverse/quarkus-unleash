@@ -1,4 +1,0 @@
-:quarkus-version: 2.2.3.Final
-:quarkus-unleash-version: 0.1.0
-
-:unleash-root-url: https://unleash.github.io/

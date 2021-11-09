@@ -1,8 +1,7 @@
-include::./includes/attributes.adoc[]
 = Quarkus - Unleash
 :extension-status: preview
 
-link:{unleash-root-url}[Unleash] is a feature toggle system, that gives you a great overview of all feature toggles across all your applications and services.
+https://unleash.github.io/[Unleash] is a feature toggle system, that gives you a great overview of all feature toggles across all your applications and services.
 Quarkus Unleash extension is client for Unleash.
 
 == Installation
@@ -25,7 +24,6 @@ Assuming you have Unleash running on localhost:4242 you should add the following
 [source,properties]
 ----
 quarkus.unleash.url=http://localhost:4242/api
-quarkus.unleash.app-name=my-unleash-app
 ----
 
 Once you have configured the properties, you can start using an Unleash-client.
@@ -44,6 +42,7 @@ public class TestService {
 }
 ----
 
+[[extension-configuration-reference]]
 == Extension Configuration Reference
 
-include::includes/quarkus-unleash.adoc[leveloffset=+1,opts=optional]
+include::config.adoc[leveloffset=+1,opts=optional]
