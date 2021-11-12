@@ -1,7 +1,7 @@
 # Quarkus Unleash
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![Build](https://github.com/quarkiverse/quarkus-unleash/workflows/Build/badge.svg?branch=master)](https://github.com/quarkiverse/quarkus-unleash/actions?query=workflow%3ABuild)
+[![Build](https://github.com/quarkiverse/quarkus-unleash/workflows/Build/badge.svg?branch=main)](https://github.com/quarkiverse/quarkus-unleash/actions?query=workflow%3ABuild)
 [![License](https://img.shields.io/github/license/quarkiverse/quarkus-unleash.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Central](https://img.shields.io/maven-central/v/io.quarkiverse.unleash/quarkus-unleash-parent?color=green)](https://search.maven.org/search?q=g:io.quarkiverse.unleash%20AND%20a:quarkus-unleash-parent)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
