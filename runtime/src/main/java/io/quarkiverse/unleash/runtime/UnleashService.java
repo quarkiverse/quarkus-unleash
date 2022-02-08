@@ -1,6 +1,7 @@
 package io.quarkiverse.unleash.runtime;
 
 import java.util.List;
+import java.util.function.BiFunction;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -35,6 +36,24 @@ public class UnleashService implements Unleash {
     @Override
     public boolean isEnabled(String toggleName, boolean defaultSetting) {
         return client.isEnabled(toggleName, defaultSetting);
+    }
+
+    @Override
+    public boolean isEnabled(String toggleName, UnleashContext unleashContext, boolean defaultSetting) {
+        return client.isEnabled(toggleName, unleashContext, defaultSetting);
+    }
+
+    @Override
+    public boolean isEnabled(String toggleName, BiFunction<String, UnleashContext, Boolean> fallbackAction) {
+        return client.isEnabled(toggleName, fallbackAction);
+    }
+
+    @Override
+    public boolean isEnabled(
+            String toggleName,
+            UnleashContext context,
+            BiFunction<String, UnleashContext, Boolean> fallbackAction) {
+        return client.isEnabled(toggleName, context, fallbackAction);
     }
 
     @Override
