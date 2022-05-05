@@ -15,7 +15,7 @@
 
     <properties>
         <unleash.version>5.0.4</unleash.version>
-        <quarkus.version>2.2.3.Final</quarkus.version>
+        <quarkus.version>2.9.0.Final</quarkus.version>
         <testcontainers.version>1.15.3</testcontainers.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
