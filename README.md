@@ -21,6 +21,12 @@ To use the extension, add the dependency to the target project:
 
 ## Simple usage
 
+Assuming you have Unleash running on localhost:4242 you should add the following properties to your application.properties and fill in the values for url.
+
+```properties
+quarkus.unleash.url=http://localhost:4242/api
+```
+
 ```java
 @ApplicationScoped
 public class TestService {
@@ -33,6 +39,23 @@ public class TestService {
     }
 }
 ```
+
+## Configuration
+
+| Property    | Description | Type        | Default |
+| ----------- | ----------- | ----------- | ----------- |
+| quarkus.unleash.url  | Unleash URL service endpoint       | string | [required] |
+| quarkus.unleash.application  | Application name       | string |  |
+| quarkus.unleash.project  | Project name       | string |  |
+| quarkus.unleash.instance-id  | Instance ID       | string |  |
+| quarkus.unleash.disable-metrics  | Disable Unleash metrics       | boolean | false |
+| quarkus.unleash.token  | Application Unleash token       | string |  |
+| quarkus.unleash.environment  | Application environment       | string |  |
+| quarkus.unleash.fetch-toggles-interval  | Fetch toggles interval (in seconds)  | long| 10 |
+| quarkus.unleash.send-metrics-interval  | Send metrics interval (in seconds)  | long| 60 |
+| quarkus.unleash.backup-file  | Backup File       | string |  |
+| quarkus.unleash.synchronous-fetch-on-initialisation  | A synchronous fetch on initialisation | boolean | false |
+| quarkus.unleash.enable-proxy-authentication-by-jvm-properties  | Enable proxy authentication by JVM properties | boolean | false |
 
 ## Contributors ✨
 
