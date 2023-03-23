@@ -1,4 +1,4 @@
-package io.quarkiverse.unleash.it;
+package io.quarkiverse.unleash.devservices;
 
 import org.testcontainers.containers.output.BaseConsumer;
 import org.testcontainers.containers.output.OutputFrame;

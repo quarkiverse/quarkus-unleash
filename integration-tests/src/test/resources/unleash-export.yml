@@ -1,11 +1,10 @@
-version: 3
+version: 4
 features:
   - name: quarkus-unleash-test-enabled
     description: ''
     type: release
     project: default
     stale: false
-    variants: [ ]
     createdAt: 2021-11-08T21:01:25.727Z
     lastSeenAt: null
   - name: quarkus-unleash-test-disabled
@@ -13,7 +12,13 @@ features:
     type: release
     project: default
     stale: false
-    variants: [ ]
+    createdAt: 2021-11-08T21:01:37.477Z
+    lastSeenAt: null
+  - name: toggle
+    description: ''
+    type: release
+    project: default
+    stale: false
     createdAt: 2021-11-08T21:01:37.477Z
     lastSeenAt: null
 strategies: [ ]
@@ -32,6 +37,14 @@ featureStrategies:
     createdAt: 2021-11-08T21:01:25.742Z
   - id: f376e70f-3bd9-47d8-8ba8-b02005f1060b
     featureName: quarkus-unleash-test-disabled
+    projectId: default
+    environment: default
+    strategyName: default
+    parameters: { }
+    constraints: [ ]
+    createdAt: 2021-11-08T21:01:37.486Z
+  - id: f376e70f-3bd9-47d8-8ba8-b02005f1060c
+    featureName: toggle
     projectId: default
     environment: default
     strategyName: default
@@ -58,6 +71,20 @@ featureEnvironments:
   - enabled: true
     featureName: quarkus-unleash-test-enabled
     environment: default
+    variants: []
   - enabled: false
     featureName: quarkus-unleash-test-disabled
     environment: default
+    variants: []
+  - enabled: true
+    featureName: toggle
+    environment: default
+    variants:
+      - name: toggle-variant
+        weight: 1000
+        payload:
+          type: string
+          value: x1
+        overrides: []
+        stickiness: default
+        weightType: variable

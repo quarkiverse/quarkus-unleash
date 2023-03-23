@@ -2,6 +2,7 @@ package io.quarkiverse.unleash;
 
 import static io.quarkus.deployment.annotations.ExecutionTime.RUNTIME_INIT;
 
+import io.quarkiverse.unleash.runtime.FeatureToggleProducer;
 import io.quarkiverse.unleash.runtime.UnleashRecorder;
 import io.quarkiverse.unleash.runtime.UnleashRuntimeTimeConfig;
 import io.quarkiverse.unleash.runtime.UnleashService;
@@ -18,7 +19,7 @@ import io.quarkus.runtime.ApplicationConfig;
 
 public class UnleashProcessor {
 
-    private static final String FEATURE_NAME = "unleash";
+    public static final String FEATURE_NAME = "unleash";
 
     @BuildStep
     @Record(RUNTIME_INIT)
@@ -50,15 +51,18 @@ public class UnleashProcessor {
     }
 
     @BuildStep
-    void build(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-        additionalBeans.produce(AdditionalBeanBuildItem.unremovableOf(UnleashService.class));
-    }
-
-    @BuildStep
     NativeImageConfigBuildItem buildNativeImage() {
         NativeImageConfigBuildItem.Builder builder = NativeImageConfigBuildItem.builder();
         builder.addRuntimeInitializedClass(io.getunleash.strategy.GradualRolloutRandomStrategy.class.getName());
         builder.addRuntimeInitializedClass(io.getunleash.DefaultUnleash.class.getName());
         return builder.build();
+    }
+
+    @BuildStep
+    AdditionalBeanBuildItem additionalBeans() {
+        return AdditionalBeanBuildItem.builder()
+                .setUnremovable()
+                .addBeanClasses(UnleashService.class, FeatureToggle.class, FeatureToggleProducer.class)
+                .build();
     }
 }
