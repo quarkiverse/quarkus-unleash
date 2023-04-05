@@ -37,7 +37,8 @@ public class UnleashDbDevServiceProcessor {
 
     static volatile boolean first = true;
 
-    private static final String DB_ALIAS = "unleash-db";
+    public static final String DB_FEATURE_NAME = FEATURE_NAME + "-db";
+    private static final String DB_ALIAS = DB_FEATURE_NAME;
 
     private static final String DEV_SERVICE_LABEL = "quarkus-dev-service-unleash-db";
     public static final int DEFAULT_UNLEASH_PORT = 5432;
@@ -158,8 +159,8 @@ public class UnleashDbDevServiceProcessor {
 
             container.start();
 
-            return new UnleashDbRunningDevService(FEATURE_NAME, container.getContainerId(),
-                    new ContainerShutdownCloseable(container, FEATURE_NAME),
+            return new UnleashDbRunningDevService(DB_FEATURE_NAME, container.getContainerId(),
+                    new ContainerShutdownCloseable(container, DB_FEATURE_NAME),
                     container.getUnleashDbHost(),
                     container.getUnleashDbPort(),
                     container.getDatabaseName(),
@@ -168,7 +169,7 @@ public class UnleashDbDevServiceProcessor {
         };
 
         return maybeContainerAddress
-                .map(containerAddress -> new UnleashDbRunningDevService(FEATURE_NAME, containerAddress.getId(), null))
+                .map(containerAddress -> new UnleashDbRunningDevService(DB_FEATURE_NAME, containerAddress.getId(), null))
                 .orElseGet(defaultUnleashSupplier);
 
     }
@@ -195,6 +196,23 @@ public class UnleashDbDevServiceProcessor {
             this.shared = config.shared;
             this.reuse = config.reuse;
 
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            UnleashDbDevServiceCfg that = (UnleashDbDevServiceCfg) o;
+            return devServicesEnabled == that.devServicesEnabled && Objects.equals(imageName, that.imageName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(devServicesEnabled, imageName);
         }
     }
 

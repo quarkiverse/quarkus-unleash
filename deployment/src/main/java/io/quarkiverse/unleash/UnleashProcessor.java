@@ -27,11 +27,13 @@ import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.ExtensionSslNativeSupportBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageConfigBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.deployment.pkg.steps.NativeBuild;
 import io.quarkus.gizmo.*;
 import io.quarkus.runtime.ApplicationConfig;
+import io.quarkus.runtime.LaunchMode;
 import io.quarkus.runtime.util.HashUtil;
 
 public class UnleashProcessor {
@@ -47,8 +49,8 @@ public class UnleashProcessor {
     @BuildStep
     @Record(RUNTIME_INIT)
     void configureRuntimeProperties(UnleashRecorder recorder, UnleashRuntimeTimeConfig runtimeConfig,
-            ApplicationConfig appConfig) {
-        recorder.initializeProducers(runtimeConfig, appConfig);
+            ApplicationConfig appConfig, LaunchModeBuildItem launchMode) {
+        recorder.initializeProducers(runtimeConfig, appConfig, launchMode.getLaunchMode() == LaunchMode.DEVELOPMENT);
     }
 
     @BuildStep(onlyIf = NativeBuild.class)

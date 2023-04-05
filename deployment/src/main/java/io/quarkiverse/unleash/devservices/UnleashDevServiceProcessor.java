@@ -48,15 +48,11 @@ public class UnleashDevServiceProcessor {
     public DevServicesResultBuildItem startUnleashContainers(LaunchModeBuildItem launchMode,
             List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
             UnleashBuildTimeConfig buildTimeConfig,
-            Optional<UnleashDbDevServicesProviderBuildItem> dbSettings,
+            UnleashDbDevServicesProviderBuildItem dbSettings,
             Optional<ConsoleInstalledBuildItem> consoleInstalledBuildItem,
             CuratedApplicationShutdownBuildItem closeBuildItem,
             DockerStatusBuildItem dockerStatusBuildItem,
             LoggingSetupBuildItem loggingSetupBuildItem, GlobalDevServicesConfig devServicesConfig) {
-
-        if (dbSettings.isEmpty()) {
-            throw new RuntimeException("Missing db settings!");
-        }
 
         UnleashDevServiceCfg configuration = getConfiguration(buildTimeConfig);
 
@@ -72,7 +68,7 @@ public class UnleashDevServiceProcessor {
                 (launchMode.isTest() ? "(test) " : "") + "Unleash Dev Services Starting:",
                 consoleInstalledBuildItem, loggingSetupBuildItem);
         try {
-            devService = startContainer(dockerStatusBuildItem, configuration, dbSettings.get(), launchMode,
+            devService = startContainer(dockerStatusBuildItem, configuration, dbSettings, launchMode,
                     !devServicesSharedNetworkBuildItem.isEmpty(),
                     devServicesConfig.timeout);
 
@@ -165,14 +161,13 @@ public class UnleashDevServiceProcessor {
 
             return new UnleashRunningDevService(FEATURE_NAME, container.getContainerId(),
                     new ContainerShutdownCloseable(container, FEATURE_NAME),
-                    configMap(container.getUrl()),
-                    container.getInternalAddress(DEFAULT_UNLEASH_PORT));
+                    configMap(container.getUrl()));
         };
 
         return maybeContainerAddress
                 .map(containerAddress -> new UnleashRunningDevService(FEATURE_NAME,
                         containerAddress.getId(),
-                        null, configMap(containerAddress.getUrl()), null))
+                        null, configMap(containerAddress.getUrl())))
                 .orElseGet(defaultUnleashSupplier);
     }
 
@@ -196,12 +191,8 @@ public class UnleashDevServiceProcessor {
 
     public static class UnleashRunningDevService extends DevServicesResultBuildItem.RunningDevService {
 
-        private String internalUrl;
-
-        public UnleashRunningDevService(String name, String containerId, Closeable closeable, Map<String, String> config,
-                String internalUrl) {
+        public UnleashRunningDevService(String name, String containerId, Closeable closeable, Map<String, String> config) {
             super(name, containerId, closeable, config);
-            this.internalUrl = internalUrl;
         }
     }
 
