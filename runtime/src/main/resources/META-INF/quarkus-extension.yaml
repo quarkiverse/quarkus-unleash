@@ -1,0 +1,12 @@
+---
+name: "Unleash"
+metadata:
+  keywords:
+  - "unleash"
+  - "feature"
+  - "toggle"
+  categories:
+    - "feature management"
+  status: "preview"
+  config:
+    - "quarkus.unleash."

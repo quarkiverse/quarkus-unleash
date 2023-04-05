@@ -7,9 +7,9 @@ import io.quarkus.runtime.annotations.Recorder;
 @Recorder
 public class UnleashRecorder {
 
-    public void initializeProducers(UnleashRuntimeTimeConfig config, ApplicationConfig appConfig) {
+    public void initializeProducers(UnleashRuntimeTimeConfig config, ApplicationConfig appConfig, boolean devMode) {
         UnleashService producer = Arc.container().instance(UnleashService.class).get();
-        producer.initialize(config, appConfig);
+        producer.initialize(config, appConfig, devMode);
     }
 
 }

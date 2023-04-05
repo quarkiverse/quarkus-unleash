@@ -18,14 +18,7 @@ To use the extension, add the dependency to the target project:
   <version>{latest-maven-release}</version>
 </dependency>
 ```
-
-## Simple usage
-
-Assuming you have Unleash running on localhost:4242 you should add the following properties to your application.properties and fill in the values for url.
-
-```properties
-quarkus.unleash.url=http://localhost:4242/api
-```
+### Unleash client
 
 ```java
 @ApplicationScoped
@@ -40,22 +33,104 @@ public class TestService {
 }
 ```
 
+### @FeatureToggle
+
+By using the `@FeatureToggle` annotation there is a shortcut to inject feature toggle.
+
+```java
+@ApplicationScoped
+public class TestService {
+
+    @FeatureToggle(name = "my-toggle")
+    Instance<Boolean> myToggle;
+
+    @FeatureToggle(name = "my-toggle", defaultValue = true)
+    Instance<Boolean> myToggleDefault;
+    
+}
+```
+
+### @FeatureVariant
+
+By using the `@FeatureVariant` annotation there is a shortcut to inject feature toggle
+variant or the payload of the variant.
+
+```java
+@ApplicationScoped
+public class TestService {
+
+    @FeatureVariant(name = "toggle-variant")
+    Instance<Variant> variant;
+
+    @FeatureVariant(name = "toggle-payload")
+    Instance<String> variant;
+
+    @FeatureVariant(name = "toggle-variant-json")
+    Instance<MyCustomJsonModel> variant;
+
+}
+```
+
 ## Configuration
 
-| Property    | Description | Type        | Default |
-| ----------- | ----------- | ----------- | ----------- |
-| quarkus.unleash.url  | Unleash URL service endpoint       | string | [required] |
-| quarkus.unleash.application  | Application name       | string |  |
-| quarkus.unleash.project  | Project name       | string |  |
-| quarkus.unleash.instance-id  | Instance ID       | string |  |
-| quarkus.unleash.disable-metrics  | Disable Unleash metrics       | boolean | false |
-| quarkus.unleash.token  | Application Unleash token       | string |  |
-| quarkus.unleash.environment  | Application environment       | string |  |
-| quarkus.unleash.fetch-toggles-interval  | Fetch toggles interval (in seconds)  | long| 10 |
-| quarkus.unleash.send-metrics-interval  | Send metrics interval (in seconds)  | long| 60 |
-| quarkus.unleash.backup-file  | Backup File       | string |  |
-| quarkus.unleash.synchronous-fetch-on-initialisation  | A synchronous fetch on initialisation | boolean | false |
-| quarkus.unleash.enable-proxy-authentication-by-jvm-properties  | Enable proxy authentication by JVM properties | boolean | false |
+```properties
+# Unleash URL service endpoint [required]
+quarkus.unleash.url=
+# Application name (default quarkus.application.name) [optional]
+quarkus.unleash.application=
+# Project name [optional]
+quarkus.unleash.project=
+# Instance ID [optional]
+quarkus.unleash.instance-id=
+# Disable Unleash metrics [optional]
+quarkus.unleash.disable-metrics=false
+# Application Unleash token [optional]
+quarkus.unleash.token=
+# Application environment [optional]
+quarkus.unleash.environment=
+# Fetch toggles interval (in seconds) [optional]
+quarkus.unleash.fetch-toggles-interval=10
+# Send metrics interval (in seconds) [optional]
+quarkus.unleash.send-metrics-interval=60
+# Backup file [optional]
+quarkus.unleash.backup-file=
+# A synchronous fetch on initialisation [optional]
+quarkus.unleash.synchronous-fetch-on-initialisation=false
+# Enable proxy authentication by JVM properties [optional]
+quarkus.unleash.enable-proxy-authentication-by-jvm-properties=false
+```
+
+## Dev-Services
+Dev Services for Unleash is automatically enabled unless:
+* `quarkus.unleash.devservices.enabled` is set to false
+* `quarkus.unleash.url` is configured
+
+Dev Service for Unleash relies on Docker to start the broker. If your environment does not support Docker, you will need
+to start the broker manually, or connect to an already running broker. You can configure the broker address using
+`quarkus.unleash.url`.
+
+#### Configuration
+
+```properties
+# Disable or enable dev-services
+quarkus.unleash.devservices.enabled=true|false
+# Optional fixed port the dev service will listen to
+quarkus.unleash.devservices.port=
+# Indicates if the Unleash server managed by Quarkus Dev Services is shared.
+quarkus.unleash.devservices.shared=true
+# This property is used when shared is set to true
+quarkus.unleash.devservices.service-name=unleash
+# The container image name to use, for container based DevServices providers.
+quarkus.unleash.devservices.image-name=
+# To enable reuse test-containers
+quarkus.unleash.devservices.reuse=false
+# The import data from file during the start.
+quarkus.unleash.devservices.import-file=
+# Database default image 
+quarkus.unleash.devservices.db.image-name=postgres
+# Database service name
+quarkus.unleash.devservices.db.service-name=unleash-db
+```
 
 ## Contributors ✨
 
