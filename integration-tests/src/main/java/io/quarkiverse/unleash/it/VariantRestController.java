@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import io.getunleash.Unleash;
 import io.getunleash.Variant;
 import io.quarkiverse.unleash.FeatureVariant;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Path("variant")
 @Produces(MediaType.APPLICATION_JSON)
@@ -52,6 +53,7 @@ public class VariantRestController {
         return Response.ok(tmp).build();
     }
 
+    @RegisterForReflection
     public static class Param {
         public String text;
 

@@ -62,6 +62,7 @@ public class UnleashProcessor {
                 io.getunleash.Constraint.class.getName(),
                 io.getunleash.variant.VariantDefinition.class.getName(),
                 io.getunleash.variant.VariantOverride.class.getName(),
+                io.getunleash.Variant.class.getName(),
                 io.getunleash.variant.Payload.class.getName(),
                 io.getunleash.Operator.class.getName(),
                 io.getunleash.FeatureToggle.class.getName(),
