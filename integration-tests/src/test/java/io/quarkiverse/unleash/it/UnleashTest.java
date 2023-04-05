@@ -16,7 +16,7 @@ public class UnleashTest {
     //Configure the containers for the test
     static {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-//        RestAssured.filters(new ResponseLoggingFilter());
+        //        RestAssured.filters(new ResponseLoggingFilter());
     }
 
     @Test
@@ -56,14 +56,22 @@ public class UnleashTest {
                 .andReturn();
 
         Assertions.assertEquals(200, response.statusCode());
-        Map<String, Map> flags = response.as(new TypeRef<Map<String, Map>>() {
+
+        System.out.println(response.asPrettyString());
+
+        Map<String, Map<Object, Object>> flags = response.as(new TypeRef<Map<String, Map<Object, Object>>>() {
         });
-        Map iToggle = flags.get("i-toggle");
+        Map<Object, Object> iToggle = flags.get("i-toggle");
         Assertions.assertNotNull(iToggle);
         Assertions.assertEquals("toggle-variant", iToggle.get("name"));
-        Map payload = (Map) iToggle.get("payload");
+        Map<Object, Object> payload = (Map<Object, Object>) iToggle.get("payload");
         Assertions.assertNotNull(payload);
-        Assertions.assertEquals("string", payload.get("type"));
-        Assertions.assertEquals("x1", payload.get("value"));
+        Assertions.assertEquals("json", payload.get("type"));
+        Assertions.assertEquals("{\"value\":1,\"enabled\":true,\"text\":\"message\"}", payload.get("value"));
+
+        Map<Object, Object> jsonType = flags.get("jsonType");
+        Assertions.assertEquals("message", jsonType.get("text"));
+        Assertions.assertEquals(1, jsonType.get("value"));
+        Assertions.assertEquals(true, jsonType.get("enabled"));
     }
 }

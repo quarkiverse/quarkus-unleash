@@ -8,9 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
 import io.quarkiverse.unleash.FeatureToggle;
-import io.quarkiverse.unleash.FeatureVariant;
 
 @Singleton
 public class FeatureToggleProducer {
@@ -34,23 +32,4 @@ public class FeatureToggleProducer {
         return unleash.isEnabled(ft.name(), ft.defaultValue());
     }
 
-    @Produces
-    @FeatureVariant(toggleName = "ignored")
-    Variant getVariant(InjectionPoint injectionPoint) {
-        FeatureVariant ft = null;
-        for (Annotation qualifier : injectionPoint.getQualifiers()) {
-            if (qualifier.annotationType().equals(FeatureVariant.class)) {
-                ft = (FeatureVariant) qualifier;
-                break;
-            }
-        }
-        if (ft == null || ft.toggleName().isEmpty()) {
-            throw new IllegalStateException("No feature toggle name of the variant specified");
-        }
-        String payload = ft.defaultPayload();
-        if (FeatureVariant.NULL_PAYLOAD.equals(payload)) {
-            payload = null;
-        }
-        return unleash.getVariant(ft.toggleName(), new Variant(ft.defaultName(), payload, ft.defaultEnabled()));
-    }
 }

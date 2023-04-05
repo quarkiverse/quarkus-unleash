@@ -83,8 +83,8 @@ featureEnvironments:
       - name: toggle-variant
         weight: 1000
         payload:
-          type: string
-          value: x1
+          type: json
+          value: '{"value":1,"enabled":true,"text":"message"}'
         overrides: []
         stickiness: default
         weightType: variable

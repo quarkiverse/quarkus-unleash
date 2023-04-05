@@ -3,6 +3,7 @@ package io.quarkiverse.unleash;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -14,17 +15,19 @@ import javax.inject.Qualifier;
 @Target({ FIELD, PARAMETER, METHOD })
 public @interface FeatureVariant {
 
-    String NULL_PAYLOAD = "<null-payload>";
-
     @Nonbinding
-    String toggleName();
+    String name();
 
-    @Nonbinding
-    String defaultName() default "disabled";
+    FeatureVariant INSTANCE = new FeatureVariant() {
+        @Override
+        public String name() {
+            return "ignored";
+        }
 
-    @Nonbinding
-    boolean defaultEnabled() default false;
+        @Override
+        public Class<? extends Annotation> annotationType() {
+            return FeatureVariant.class;
+        }
+    };
 
-    @Nonbinding
-    String defaultPayload() default NULL_PAYLOAD;
 }

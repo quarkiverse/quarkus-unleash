@@ -198,7 +198,7 @@ public class UnleashDbDevServiceProcessor {
         }
     }
 
-    private static class UnleashPostgreSQLContainer extends PostgreSQLContainer {
+    private static class UnleashPostgreSQLContainer extends PostgreSQLContainer<UnleashPostgreSQLContainer> {
         private final boolean useSharedNetwork;
         private String hostName = null;
 

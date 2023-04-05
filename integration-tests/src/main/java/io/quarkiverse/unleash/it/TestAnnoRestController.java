@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,19 +16,15 @@ import io.quarkiverse.unleash.FeatureToggle;
 @Produces(MediaType.APPLICATION_JSON)
 public class TestAnnoRestController {
 
-    @Inject
     @FeatureToggle(name = "quarkus-unleash-test-enabled")
     Instance<Boolean> enabled;
 
-    @Inject
     @FeatureToggle(name = "quarkus-unleash-test-disabled")
     Instance<Boolean> disabled;
 
-    @Inject
     @FeatureToggle(name = "toggle")
     Instance<Boolean> toggle;
 
-    @Inject
     @FeatureToggle(name = "default-true", defaultValue = true)
     Instance<Boolean> defaultTrue;
 

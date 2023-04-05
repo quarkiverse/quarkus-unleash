@@ -19,18 +19,45 @@ import io.quarkiverse.unleash.FeatureVariant;
 @Produces(MediaType.APPLICATION_JSON)
 public class VariantRestController {
 
-    @Inject
-    @FeatureVariant(toggleName = "toggle")
+    @FeatureVariant(name = "toggle")
     Instance<Variant> variant;
+
+    @FeatureVariant(name = "toggle")
+    Instance<Variant> notFound;
+
+    @FeatureVariant(name = "toggle")
+    Instance<Variant> found;
+
+    @FeatureVariant(name = "toggle")
+    Instance<String> defaultType;
+
+    @FeatureVariant(name = "toggle")
+    Instance<Param> jsonType;
+
+    @FeatureVariant(name = "toggle")
+    Instance<io.quarkiverse.unleash.it.Param> jsonType2;
 
     @Inject
     Unleash unleash;
 
     @GET
     public Response variants() {
-        Map<String, Variant> tmp = new HashMap<>();
+        Map<String, Object> tmp = new HashMap<>();
+        tmp.put("defaultType", Map.of("data", defaultType.get()));
+        tmp.put("jsonType", jsonType.get());
         tmp.put("i-toggle", variant.get());
+        tmp.put("notFound", notFound.get());
+        tmp.put("found", found.get());
         tmp.put("toggle", unleash.getVariant("toggle", io.getunleash.Variant.DISABLED_VARIANT));
         return Response.ok(tmp).build();
+    }
+
+    public static class Param {
+        public String text;
+
+        public Long value;
+
+        public Boolean enabled;
+
     }
 }
