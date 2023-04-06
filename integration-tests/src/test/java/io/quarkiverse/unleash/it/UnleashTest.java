@@ -1,16 +1,26 @@
 package io.quarkiverse.unleash.it;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+
 import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import io.getunleash.Unleash;
+import io.quarkiverse.unleash.InjectUnleash;
+import io.quarkiverse.unleash.InjectUnleashAdmin;
+import io.quarkiverse.unleash.UnleashAdmin;
+import io.quarkiverse.unleash.UnleashTestResource;
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 
 @QuarkusTest
+@QuarkusTestResource(UnleashTestResource.class)
 public class UnleashTest {
 
     //Configure the containers for the test
@@ -18,6 +28,12 @@ public class UnleashTest {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         //        RestAssured.filters(new ResponseLoggingFilter());
     }
+
+    @InjectUnleashAdmin
+    UnleashAdmin admin;
+
+    @InjectUnleash
+    Unleash client;
 
     @Test
     public void testUnleashClient() {
@@ -57,8 +73,6 @@ public class UnleashTest {
 
         Assertions.assertEquals(200, response.statusCode());
 
-        System.out.println(response.asPrettyString());
-
         Map<String, Map<Object, Object>> flags = response.as(new TypeRef<Map<String, Map<Object, Object>>>() {
         });
         Map<Object, Object> iToggle = flags.get("i-toggle");
@@ -73,5 +87,37 @@ public class UnleashTest {
         Assertions.assertEquals("message", jsonType.get("text"));
         Assertions.assertEquals(1, jsonType.get("value"));
         Assertions.assertEquals(true, jsonType.get("enabled"));
+    }
+
+    @Test
+    public void testAdminClient() {
+
+        admin.toggleOff("toggle");
+        admin.toggleOn("quarkus-unleash-test-disabled");
+
+        // wait for change
+        await().atMost(7, SECONDS)
+                .pollInterval(2, SECONDS)
+                .until(() -> client.isEnabled("quarkus-unleash-test-disabled"));
+
+        Response response = RestAssured.when()
+                .get("/tests-anno")
+                .andReturn();
+
+        Assertions.assertEquals(200, response.statusCode());
+        Map<String, Boolean> flags = response.as(new TypeRef<Map<String, Boolean>>() {
+        });
+        Assertions.assertTrue(flags.get("quarkus-unleash-test-disabled"));
+        Assertions.assertTrue(flags.get("quarkus-unleash-test-enabled"));
+        Assertions.assertFalse(flags.get("toggle"));
+        Assertions.assertTrue(flags.get("default-true"));
+
+        admin.toggleOff("quarkus-unleash-test-disabled");
+        admin.toggleOn("toggle");
+
+        // wait for change
+        await().atMost(7, SECONDS)
+                .pollInterval(2, SECONDS)
+                .until(() -> client.isEnabled("toggle"));
     }
 }
