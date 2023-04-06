@@ -15,7 +15,7 @@ To use the extension, add the dependency to the target project:
 <dependency>
   <groupId>io.quarkiverse.unleash</groupId>
   <artifactId>quarkus-unleash</artifactId>
-  <version>{latest-maven-release}</version>
+  <version>{version}</version>
 </dependency>
 ```
 ### Unleash client
@@ -132,6 +132,49 @@ quarkus.unleash.devservices.db.image-name=postgres
 quarkus.unleash.devservices.db.service-name=unleash-db
 ```
 
+## Testing
+To use the test extension, add this dependency to the project:
+```xml
+<dependency>
+    <groupId>io.quarkiverse.unleash</groupId>
+    <artifactId>quarkus-unleash-test</artifactId>
+    <version>{version}</version>
+    <scope>test</scope>
+</dependency>
+```
+
+`UnleashTestResource` creates an instance of admin and standard `Unleash` clients just for testing.
+These instances are separate from the application instances.
+
+```java
+@QuarkusTest
+@QuarkusTestResource(UnleashTestResource.class)
+public class BaseTest {
+
+    @InjectUnleashAdmin
+    UnleashAdmin admin;
+
+    @InjectUnleash
+    Unleash client;
+
+    @Test
+    public void test() {
+        
+        admin.toggleOff("toggle-1");
+        admin.toggleOn("toggle-2");
+
+        // wait for client change
+        await().atLeast(12, SECONDS)
+                .pollInterval(4, SECONDS)
+                .until(() -> client.isEnabled("toggle-2"));
+        
+        boolean toggleOn = client.isEnabled("toggle-2");
+        
+        // ... test my application
+        
+    }
+}
+```
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

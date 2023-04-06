@@ -159,21 +159,26 @@ public class UnleashDevServiceProcessor {
 
             container.start();
 
+            String adminClient = container.getExternalAddress(DEFAULT_UNLEASH_PORT);
+
             return new UnleashRunningDevService(FEATURE_NAME, container.getContainerId(),
                     new ContainerShutdownCloseable(container, FEATURE_NAME),
-                    configMap(container.getUrl()));
+                    configMap(container.getUrl(), adminClient));
         };
 
         return maybeContainerAddress
                 .map(containerAddress -> new UnleashRunningDevService(FEATURE_NAME,
                         containerAddress.getId(),
-                        null, configMap(containerAddress.getUrl())))
+                        null, configMap(containerAddress.getUrl(), null)))
                 .orElseGet(defaultUnleashSupplier);
     }
 
-    private static Map<String, String> configMap(String url) {
+    private static Map<String, String> configMap(String url, String adminClient) {
         Map<String, String> config = new HashMap<>();
         config.put(PROP_UNLEASH_URL, url);
+        if (adminClient != null) {
+            config.put("quarkiverse.unleash.devservices.admin.url", adminClient);
+        }
         return config;
     }
 
@@ -281,6 +286,10 @@ public class UnleashDevServiceProcessor {
 
             // wait for start
             this.waitingFor(Wait.forHttp("/"));
+        }
+
+        public String getExternalAddress(final int port) {
+            return this.getHost() + ":" + this.getMappedPort(port);
         }
 
         @Override

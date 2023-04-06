@@ -234,6 +234,7 @@ public class UnleashDbDevServiceProcessor {
             }
 
             addExposedPort(POSTGRESQL_PORT);
+            hostName = DB_ALIAS;
             this.withNetworkAliases(DB_ALIAS);
         }
 
@@ -248,7 +249,7 @@ public class UnleashDbDevServiceProcessor {
         }
 
         public String getUnleashDbHost() {
-            return DB_ALIAS;
+            return hostName;
         }
 
         public Integer getUnleashDbPort() {
