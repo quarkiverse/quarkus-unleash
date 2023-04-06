@@ -7,6 +7,10 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+## Getting started
+
+Read the full [Quarkus Unleash documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/dev/).
+
 ## Usage
 
 To use the extension, add the dependency to the target project:

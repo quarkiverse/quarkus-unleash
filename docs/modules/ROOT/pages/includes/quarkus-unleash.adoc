@@ -1,0 +1,354 @@
+
+:summaryTableId: quarkus-unleash
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[quarkus-unleash_configuration]]link:#quarkus-unleash_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.enabled]]`link:#quarkus-unleash_quarkus.unleash.devservices.enabled[quarkus.unleash.devservices.enabled]`
+
+[.description]
+--
+If DevServices has been explicitly enabled or disabled. DevServices is generally enabled by default, unless there is an existing configuration present. 
+When DevServices is enabled Quarkus will attempt to automatically configure and start a database when running in Dev or Test mode and when Docker is running.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.port]]`link:#quarkus-unleash_quarkus.unleash.devservices.port[quarkus.unleash.devservices.port]`
+
+[.description]
+--
+Optional fixed port the dev service will listen to. 
+If not defined, the port will be chosen randomly.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_PORT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_PORT+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.shared]]`link:#quarkus-unleash_quarkus.unleash.devservices.shared[quarkus.unleash.devservices.shared]`
+
+[.description]
+--
+Indicates if the Unleash server managed by Quarkus Dev Services is shared. When shared, Quarkus looks for running containers using label-based service discovery. If a matching container is found, it is used, and so a second one is not started. Otherwise, Dev Services for Unleash starts a new container. 
+The discovery uses the `quarkus-dev-service-unleash` label. The value is configured using the `service-name` property. 
+Container sharing is only used in dev mode.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_SHARED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_SHARED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.service-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.service-name[quarkus.unleash.devservices.service-name]`
+
+[.description]
+--
+The value of the `quarkus-dev-service-unleash` label attached to the started container. This property is used when `shared` is set to `true`. In this case, before starting a container, Dev Services for Unleash looks for a container with the `quarkus-dev-service-unleash` label set to the configured value. If found, it will use this container instead of starting a new one. Otherwise, it starts a new container with the `quarkus-dev-service-unleash` label set to the specified value. 
+This property is used when you need multiple shared Unleash servers.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_SERVICE_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_SERVICE_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`unleash`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.image-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.image-name[quarkus.unleash.devservices.image-name]`
+
+[.description]
+--
+The container image name to use, for container based DevServices providers.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_IMAGE_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_IMAGE_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.reuse]]`link:#quarkus-unleash_quarkus.unleash.devservices.reuse[quarkus.unleash.devservices.reuse]`
+
+[.description]
+--
+Helper to define the stop strategy for containers created by DevServices. In particular, we don't want to actually stop the containers when they have been flagged for reuse, and when the Testcontainers configuration has been explicitly set to allow container reuse. To enable reuse, ass `testcontainers.reuse.enable=true` in your `.testcontainers.properties` file, to be stored in your home.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_REUSE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_REUSE+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.import-file]]`link:#quarkus-unleash_quarkus.unleash.devservices.import-file[quarkus.unleash.devservices.import-file]`
+
+[.description]
+--
+The import data from file during the start.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_IMPORT_FILE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_IMPORT_FILE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.db.image-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.db.image-name[quarkus.unleash.devservices.db.image-name]`
+
+[.description]
+--
+The container image name to use, for container based zeebe simple monitor.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_DB_IMAGE_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_DB_IMAGE_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`postgres`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.db.service-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.db.service-name[quarkus.unleash.devservices.db.service-name]`
+
+[.description]
+--
+The value of the `quarkus-dev-service-unleash-db` label attached to the started container. This property is used when `shared` is set to `true`. In this case, before starting a container, Dev Services for Unleash DB looks for a container with the `quarkus-dev-service-unleash-db` label set to the configured value. If found, it will use this container instead of starting a new one. Otherwise, it starts a new container with the `quarkus-dev-service-unleash-db` label set to the specified value. 
+This property is used when you need multiple shared Unleash DB servers.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_DB_SERVICE_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_DB_SERVICE_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`unleash-db`
+
+
+a| [[quarkus-unleash_quarkus.unleash.url]]`link:#quarkus-unleash_quarkus.unleash.url[quarkus.unleash.url]`
+
+[.description]
+--
+Unleash URL service endpoint
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_URL+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|required icon:exclamation-circle[title=Configuration property is required]
+
+
+a| [[quarkus-unleash_quarkus.unleash.application]]`link:#quarkus-unleash_quarkus.unleash.application[quarkus.unleash.application]`
+
+[.description]
+--
+Application name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_APPLICATION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_APPLICATION+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-unleash_quarkus.unleash.project]]`link:#quarkus-unleash_quarkus.unleash.project[quarkus.unleash.project]`
+
+[.description]
+--
+Project name
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_PROJECT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_PROJECT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-unleash_quarkus.unleash.instance-id]]`link:#quarkus-unleash_quarkus.unleash.instance-id[quarkus.unleash.instance-id]`
+
+[.description]
+--
+Instance ID.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_INSTANCE_ID+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_INSTANCE_ID+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-unleash_quarkus.unleash.disable-metrics]]`link:#quarkus-unleash_quarkus.unleash.disable-metrics[quarkus.unleash.disable-metrics]`
+
+[.description]
+--
+Disable Unleash metrics
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DISABLE_METRICS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DISABLE_METRICS+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[quarkus-unleash_quarkus.unleash.token]]`link:#quarkus-unleash_quarkus.unleash.token[quarkus.unleash.token]`
+
+[.description]
+--
+Application Unleash token
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_TOKEN+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_TOKEN+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-unleash_quarkus.unleash.environment]]`link:#quarkus-unleash_quarkus.unleash.environment[quarkus.unleash.environment]`
+
+[.description]
+--
+Application environment
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_ENVIRONMENT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_ENVIRONMENT+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-unleash_quarkus.unleash.fetch-toggles-interval]]`link:#quarkus-unleash_quarkus.unleash.fetch-toggles-interval[quarkus.unleash.fetch-toggles-interval]`
+
+[.description]
+--
+Fetch toggles interval
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_FETCH_TOGGLES_INTERVAL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_FETCH_TOGGLES_INTERVAL+++`
+endif::add-copy-button-to-env-var[]
+--|long 
+|`10`
+
+
+a| [[quarkus-unleash_quarkus.unleash.send-metrics-interval]]`link:#quarkus-unleash_quarkus.unleash.send-metrics-interval[quarkus.unleash.send-metrics-interval]`
+
+[.description]
+--
+Send metrics interval
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_SEND_METRICS_INTERVAL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_SEND_METRICS_INTERVAL+++`
+endif::add-copy-button-to-env-var[]
+--|long 
+|`60`
+
+
+a| [[quarkus-unleash_quarkus.unleash.backup-file]]`link:#quarkus-unleash_quarkus.unleash.backup-file[quarkus.unleash.backup-file]`
+
+[.description]
+--
+Backup file
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_BACKUP_FILE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_BACKUP_FILE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-unleash_quarkus.unleash.synchronous-fetch-on-initialisation]]`link:#quarkus-unleash_quarkus.unleash.synchronous-fetch-on-initialisation[quarkus.unleash.synchronous-fetch-on-initialisation]`
+
+[.description]
+--
+A synchronous fetch on initialisation
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_SYNCHRONOUS_FETCH_ON_INITIALISATION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_SYNCHRONOUS_FETCH_ON_INITIALISATION+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[quarkus-unleash_quarkus.unleash.enable-proxy-authentication-by-jvm-properties]]`link:#quarkus-unleash_quarkus.unleash.enable-proxy-authentication-by-jvm-properties[quarkus.unleash.enable-proxy-authentication-by-jvm-properties]`
+
+[.description]
+--
+Enable proxy authentication by JVM properties
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_ENABLE_PROXY_AUTHENTICATION_BY_JVM_PROPERTIES+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_ENABLE_PROXY_AUTHENTICATION_BY_JVM_PROPERTIES+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+|===

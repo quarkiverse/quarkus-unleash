@@ -1,6 +1,8 @@
 = Quarkus - Unleash
 :extension-status: preview
 
+include::./includes/attributes.adoc[]
+
 https://unleash.github.io/[Unleash] is a feature toggle system, that gives you a great overview of all feature toggles across all your applications and services.
 Quarkus Unleash extension is client for Unleash.
 
@@ -9,17 +11,20 @@ Quarkus Unleash extension is client for Unleash.
 If you want to use this extension, you need to add the `quarkiverse-unleash` extension first.
 In your `pom.xml` file, add:
 
-[source,xml]
+[source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.unleash</groupId>
     <artifactId>quarkus-unleash</artifactId>
+    <version>{project-version}</version>
 </dependency>
 ----
 
 == Usage
 
-Assuming you have Unleash running on localhost:4242 you should add the following properties to your application.properties and fill in the values for url.
+=== Unleash client
+
+Assuming you have `Unleash` running on localhost:4242 you should add the following properties to your application.properties and fill in the values for url.
 
 [source,properties]
 ----
@@ -42,7 +47,104 @@ public class TestService {
 }
 ----
 
+=== @FeatureToggle
+
+By using the `@FeatureToggle` annotation there is a shortcut to inject feature toggle.
+
+[source,java]
+----
+@ApplicationScoped
+public class TestService {
+
+    @FeatureToggle(name = "my-toggle")
+    Instance<Boolean> myToggle;
+
+    @FeatureToggle(name = "my-toggle", defaultValue = true)
+    Instance<Boolean> myToggleDefault;
+
+}
+----
+
+=== @FeatureVariant
+
+By using the `@FeatureVariant` annotation there is a shortcut to inject feature toggle
+variant or the payload of the variant.
+
+[source,java]
+----
+@ApplicationScoped
+public class TestService {
+
+    @FeatureVariant(name = "toggle-variant")
+    Instance<Variant> variant;
+
+    @FeatureVariant(name = "toggle-payload")
+    Instance<String> variant;
+
+    @FeatureVariant(name = "toggle-variant-json")
+    Instance<MyCustomJsonModel> variant;
+
+}
+----
+
+=== Testing
+To use the test extension, add this dependency to the project:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.unleash</groupId>
+    <artifactId>quarkus-unleash-test</artifactId>
+    <version>{project-version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+`UnleashTestResource` creates an instance of admin and standard `Unleash` clients just for testing.
+These instances are separate from the application instances.
+
+[source,java]
+----
+@QuarkusTest
+@QuarkusTestResource(UnleashTestResource.class)
+public class BaseTest {
+
+    @InjectUnleashAdmin
+    UnleashAdmin admin;
+
+    @InjectUnleash
+    Unleash client;
+
+    @Test
+    public void test() {
+
+        admin.toggleOff("toggle-1");
+        admin.toggleOn("toggle-2");
+
+        // wait for client change
+        await().atLeast(12, SECONDS)
+                .pollInterval(4, SECONDS)
+                .until(() -> client.isEnabled("toggle-2"));
+
+        boolean toggleOn = client.isEnabled("toggle-2");
+
+        // ... test my application
+
+    }
+}
+----
+
+=== Dev-Services
+Dev Services for Unleash is automatically enabled unless:
+
+* `quarkus.unleash.devservices.enabled` is set to false
+* `quarkus.unleash.url` is configured
+
+Dev Service for Unleash relies on Docker to start the broker. If your environment does not support Docker, you will need
+to start the broker manually, or connect to an already running broker. You can configure the broker address using
+`quarkus.unleash.url`.
+
 [[extension-configuration-reference]]
 == Extension Configuration Reference
 
-include::config.adoc[leveloffset=+1,opts=optional]
+include::includes/quarkus-unleash.adoc[leveloffset=+1, opts=optional]
