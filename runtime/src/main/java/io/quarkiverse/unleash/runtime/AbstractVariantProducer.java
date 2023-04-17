@@ -3,7 +3,7 @@ package io.quarkiverse.unleash.runtime;
 import java.lang.annotation.Annotation;
 import java.util.Optional;
 
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
 import io.getunleash.Unleash;
 import io.getunleash.Variant;
