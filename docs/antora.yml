@@ -1,5 +1,5 @@
 name: quarkus-unleash
 title: Quarkus Unleash
-version: dev
+version: 0.x
 nav:
   - modules/ROOT/nav.adoc
