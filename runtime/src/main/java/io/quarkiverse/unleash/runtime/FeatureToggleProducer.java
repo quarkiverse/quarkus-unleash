@@ -2,10 +2,10 @@ package io.quarkiverse.unleash.runtime;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import io.getunleash.Unleash;
 import io.quarkiverse.unleash.FeatureToggle;

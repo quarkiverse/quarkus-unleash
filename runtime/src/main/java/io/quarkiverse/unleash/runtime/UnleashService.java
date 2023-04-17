@@ -1,8 +1,8 @@
 package io.quarkiverse.unleash.runtime;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
 
 import io.getunleash.Unleash;
 import io.quarkus.logging.Log;
