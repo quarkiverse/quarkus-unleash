@@ -2,16 +2,24 @@
 
 [![Build](https://github.com/quarkiverse/quarkus-unleash/workflows/Build/badge.svg?branch=main)](https://github.com/quarkiverse/quarkus-unleash/actions?query=workflow%3ABuild)
 [![License](https://img.shields.io/github/license/quarkiverse/quarkus-unleash.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Central](https://img.shields.io/maven-central/v/io.quarkiverse.unleash/quarkus-unleash-parent?color=green)](https://search.maven.org/search?q=g:io.quarkiverse.unleash%20AND%20a:quarkus-unleash-parent)
+[![Central](https://img.shields.io/maven-central/v/io.quarkiverse.unleash/quarkus-unleash-parent?color=green)](https://central.sonatype.com/artifact/io.quarkiverse.unleash/quarkus-unleash-parent)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+
+## Compatibility
+
+Quarkus Unleash provides two different version streams, one compatible with Quarkus 2.x and the other compatible with Quarkus 3.x.
+
+| Quarkus | Quarkus Unleash | Documentation                                                                                        |
+|---------|-----------------|------------------------------------------------------------------------------------------------------|
+| 2.x     | 0.x             | [Documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/dev/index.html) |
+| 3.x     | 1.x             | [Documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/dev/index.html) |
+
+Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://central.sonatype.com/artifact/io.quarkiverse.unleash/quarkus-unleash-parent).
+
 ## Getting started
-
-Read the full [Quarkus Unleash documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/dev/).
-
-## Usage
 
 To use the extension, add the dependency to the target project:
 
@@ -19,7 +27,6 @@ To use the extension, add the dependency to the target project:
 <dependency>
   <groupId>io.quarkiverse.unleash</groupId>
   <artifactId>quarkus-unleash</artifactId>
-  <version>{version}</version>
 </dependency>
 ```
 ### Unleash client
