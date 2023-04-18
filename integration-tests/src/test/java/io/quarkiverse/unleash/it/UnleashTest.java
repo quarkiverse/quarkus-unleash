@@ -5,8 +5,7 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import java.util.Map;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import io.getunleash.Unleash;
 import io.quarkiverse.unleash.InjectUnleash;
@@ -21,6 +20,7 @@ import io.restassured.response.Response;
 
 @QuarkusTest
 @QuarkusTestResource(UnleashTestResource.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UnleashTest {
 
     //Configure the containers for the test
@@ -36,6 +36,7 @@ public class UnleashTest {
     Unleash client;
 
     @Test
+    @Order(1)
     public void testUnleashClient() {
         Response response = RestAssured.when()
                 .get("/tests")
@@ -51,6 +52,7 @@ public class UnleashTest {
     }
 
     @Test
+    @Order(2)
     public void testFeatureToggleAnnotation() {
         Response response = RestAssured.when()
                 .get("/tests-anno")
@@ -66,6 +68,7 @@ public class UnleashTest {
     }
 
     @Test
+    @Order(3)
     public void testVariant() {
         Response response = RestAssured.when()
                 .get("/variant")
@@ -91,6 +94,7 @@ public class UnleashTest {
     }
 
     @Test
+    @Order(4)
     public void testAdminClient() {
 
         admin.toggleOff("toggle");
