@@ -105,6 +105,13 @@ public class UnleashTest {
                 .pollInterval(2, SECONDS)
                 .until(() -> client.isEnabled("quarkus-unleash-test-disabled"));
 
+        // wait for change
+        await().atMost(7, SECONDS)
+                .pollInterval(2, SECONDS)
+                .until(() -> RestAssured.when()
+                        .get("/tests/quarkus-unleash-test-disabled")
+                        .andReturn().as(Boolean.class));
+
         Response response = RestAssured.when()
                 .get("/tests-anno")
                 .andReturn();
@@ -120,9 +127,5 @@ public class UnleashTest {
         admin.toggleOff("quarkus-unleash-test-disabled");
         admin.toggleOn("toggle");
 
-        // wait for change
-        await().atMost(7, SECONDS)
-                .pollInterval(2, SECONDS)
-                .until(() -> client.isEnabled("toggle"));
     }
 }

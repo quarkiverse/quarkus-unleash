@@ -6,6 +6,7 @@ import java.util.Map;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -27,5 +28,11 @@ public class TestRestController {
         tmp.put("toggle", unleash.isEnabled("toggle"));
         tmp.put("default-true", unleash.isEnabled("default-true", true));
         return Response.ok(tmp).build();
+    }
+
+    @GET
+    @Path("{name}")
+    public Boolean get(@PathParam("name") String name) {
+        return unleash.isEnabled(name, false);
     }
 }
