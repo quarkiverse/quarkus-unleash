@@ -92,9 +92,9 @@ public class UnleashDevServicesConfig {
     public static class UnleashDatabaseConfig {
 
         /**
-         * The container image name to use, for container based zeebe simple monitor.
+         * The container image name to use, for unleash database.
          */
-        @ConfigItem(name = "image-name", defaultValue = "postgres")
+        @ConfigItem(name = "image-name", defaultValue = "postgres:15.2")
         public String imageName;
 
         /**

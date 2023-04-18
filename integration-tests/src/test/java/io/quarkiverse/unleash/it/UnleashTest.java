@@ -78,6 +78,7 @@ public class UnleashTest {
         Map<Object, Object> iToggle = flags.get("i-toggle");
         Assertions.assertNotNull(iToggle);
         Assertions.assertEquals("toggle-variant", iToggle.get("name"));
+        @SuppressWarnings("unchecked")
         Map<Object, Object> payload = (Map<Object, Object>) iToggle.get("payload");
         Assertions.assertNotNull(payload);
         Assertions.assertEquals("json", payload.get("type"));

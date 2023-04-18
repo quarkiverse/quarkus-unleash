@@ -55,7 +55,7 @@ public class UnleashProcessor {
 
     @BuildStep(onlyIf = NativeBuild.class)
     void nativeImageConfiguration(BuildProducer<ReflectiveClassBuildItem> reflective) {
-        reflective.produce(new ReflectiveClassBuildItem(true, true, true,
+        reflective.produce(ReflectiveClassBuildItem.builder(
                 io.getunleash.metric.ClientRegistration.class.getName(),
                 io.getunleash.metric.ClientMetrics.class.getName(),
                 io.getunleash.ActivationStrategy.class.getName(),
@@ -66,7 +66,11 @@ public class UnleashProcessor {
                 io.getunleash.variant.Payload.class.getName(),
                 io.getunleash.Operator.class.getName(),
                 io.getunleash.FeatureToggle.class.getName(),
-                io.getunleash.repository.ToggleCollection.class.getName()));
+                io.getunleash.repository.ToggleCollection.class.getName())
+                .constructors(true)
+                .methods(true)
+                .fields(true)
+                .build());
     }
 
     @BuildStep

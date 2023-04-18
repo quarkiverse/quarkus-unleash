@@ -131,7 +131,7 @@ a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devserv
 
 [.description]
 --
-The container image name to use, for container based zeebe simple monitor.
+The container image name to use, for unleash database.
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_DB_IMAGE_NAME+++[]
@@ -140,7 +140,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_DB_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --|string 
-|`postgres`
+|`postgres:15.2`
 
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.db.service-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.db.service-name[quarkus.unleash.devservices.db.service-name]`
