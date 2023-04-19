@@ -14,7 +14,7 @@ Quarkus Unleash provides two different version streams, one compatible with Quar
 
 | Quarkus | Quarkus Unleash | Documentation                                                                                        |
 |---------|-----------------|------------------------------------------------------------------------------------------------------|
-| 2.x     | 0.x             | [Documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/dev/index.html) |
+| 2.x     | 0.x             | [Documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/0.x/index.html) |
 | 3.x     | 1.x             | [Documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-unleash/dev/index.html) |
 
 Use the latest version of the corresponding stream, [the list of versions is available on Maven Central](https://central.sonatype.com/artifact/io.quarkiverse.unleash/quarkus-unleash-parent).
