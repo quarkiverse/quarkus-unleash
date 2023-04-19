@@ -10,7 +10,7 @@
     <groupId>io.quarkiverse.unleash</groupId>
     <artifactId>quarkus-unleash-parent</artifactId>
     <name>Quarkus - Unleash - Parent</name>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>0.7.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -94,4 +94,8 @@
             </modules>
         </profile>
     </profiles>
+
+  <scm>
+    <tag>0.7.0</tag>
+  </scm>
 </project>
