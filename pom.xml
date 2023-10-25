@@ -12,7 +12,7 @@
   <version>999-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <unleash.version>8.2.1</unleash.version>
+    <unleash.version>8.4.0</unleash.version>
     <quarkus.version>3.1.2.Final</quarkus.version>
     <testcontainers.version>1.19.1</testcontainers.version>
     <maven.compiler.source>11</maven.compiler.source>
