@@ -61,6 +61,12 @@ public class UnleashDevServicesConfig {
     public Optional<String> imageName;
 
     /**
+     * Enabled or disable log of the mock-server
+     */
+    @ConfigItem(name = "log", defaultValue = "false")
+    public boolean log;
+
+    /**
      * Helper to define the stop strategy for containers created by DevServices.
      * In particular, we don't want to actually stop the containers when they
      * have been flagged for reuse, and when the Testcontainers configuration
