@@ -12,9 +12,11 @@ h|Default
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.enabled]]`link:#quarkus-unleash_quarkus.unleash.devservices.enabled[quarkus.unleash.devservices.enabled]`
 
+
 [.description]
 --
-If DevServices has been explicitly enabled or disabled. DevServices is generally enabled by default, unless there is an existing configuration present. 
+If DevServices has been explicitly enabled or disabled. DevServices is generally enabled by default, unless there is an existing configuration present.
+
 When DevServices is enabled Quarkus will attempt to automatically configure and start a database when running in Dev or Test mode and when Docker is running.
 
 ifdef::add-copy-button-to-env-var[]
@@ -29,9 +31,11 @@ endif::add-copy-button-to-env-var[]
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.port]]`link:#quarkus-unleash_quarkus.unleash.devservices.port[quarkus.unleash.devservices.port]`
 
+
 [.description]
 --
-Optional fixed port the dev service will listen to. 
+Optional fixed port the dev service will listen to.
+
 If not defined, the port will be chosen randomly.
 
 ifdef::add-copy-button-to-env-var[]
@@ -46,10 +50,13 @@ endif::add-copy-button-to-env-var[]
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.shared]]`link:#quarkus-unleash_quarkus.unleash.devservices.shared[quarkus.unleash.devservices.shared]`
 
+
 [.description]
 --
-Indicates if the Unleash server managed by Quarkus Dev Services is shared. When shared, Quarkus looks for running containers using label-based service discovery. If a matching container is found, it is used, and so a second one is not started. Otherwise, Dev Services for Unleash starts a new container. 
-The discovery uses the `quarkus-dev-service-unleash` label. The value is configured using the `service-name` property. 
+Indicates if the Unleash server managed by Quarkus Dev Services is shared. When shared, Quarkus looks for running containers using label-based service discovery. If a matching container is found, it is used, and so a second one is not started. Otherwise, Dev Services for Unleash starts a new container.
+
+The discovery uses the `quarkus-dev-service-unleash` label. The value is configured using the `service-name` property.
+
 Container sharing is only used in dev mode.
 
 ifdef::add-copy-button-to-env-var[]
@@ -64,9 +71,11 @@ endif::add-copy-button-to-env-var[]
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.service-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.service-name[quarkus.unleash.devservices.service-name]`
 
+
 [.description]
 --
-The value of the `quarkus-dev-service-unleash` label attached to the started container. This property is used when `shared` is set to `true`. In this case, before starting a container, Dev Services for Unleash looks for a container with the `quarkus-dev-service-unleash` label set to the configured value. If found, it will use this container instead of starting a new one. Otherwise, it starts a new container with the `quarkus-dev-service-unleash` label set to the specified value. 
+The value of the `quarkus-dev-service-unleash` label attached to the started container. This property is used when `shared` is set to `true`. In this case, before starting a container, Dev Services for Unleash looks for a container with the `quarkus-dev-service-unleash` label set to the configured value. If found, it will use this container instead of starting a new one. Otherwise, it starts a new container with the `quarkus-dev-service-unleash` label set to the specified value.
+
 This property is used when you need multiple shared Unleash servers.
 
 ifdef::add-copy-button-to-env-var[]
@@ -80,6 +89,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.image-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.image-name[quarkus.unleash.devservices.image-name]`
+
 
 [.description]
 --
@@ -95,7 +105,25 @@ endif::add-copy-button-to-env-var[]
 |
 
 
+a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.log]]`link:#quarkus-unleash_quarkus.unleash.devservices.log[quarkus.unleash.devservices.log]`
+
+
+[.description]
+--
+Enabled or disable log of the mock-server
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DEVSERVICES_LOG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_LOG+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.reuse]]`link:#quarkus-unleash_quarkus.unleash.devservices.reuse[quarkus.unleash.devservices.reuse]`
+
 
 [.description]
 --
@@ -113,6 +141,7 @@ endif::add-copy-button-to-env-var[]
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.import-file]]`link:#quarkus-unleash_quarkus.unleash.devservices.import-file[quarkus.unleash.devservices.import-file]`
 
+
 [.description]
 --
 The import data from file during the start.
@@ -128,6 +157,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.db.image-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.db.image-name[quarkus.unleash.devservices.db.image-name]`
+
 
 [.description]
 --
@@ -145,9 +175,11 @@ endif::add-copy-button-to-env-var[]
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.db.service-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.db.service-name[quarkus.unleash.devservices.db.service-name]`
 
+
 [.description]
 --
-The value of the `quarkus-dev-service-unleash-db` label attached to the started container. This property is used when `shared` is set to `true`. In this case, before starting a container, Dev Services for Unleash DB looks for a container with the `quarkus-dev-service-unleash-db` label set to the configured value. If found, it will use this container instead of starting a new one. Otherwise, it starts a new container with the `quarkus-dev-service-unleash-db` label set to the specified value. 
+The value of the `quarkus-dev-service-unleash-db` label attached to the started container. This property is used when `shared` is set to `true`. In this case, before starting a container, Dev Services for Unleash DB looks for a container with the `quarkus-dev-service-unleash-db` label set to the configured value. If found, it will use this container instead of starting a new one. Otherwise, it starts a new container with the `quarkus-dev-service-unleash-db` label set to the specified value.
+
 This property is used when you need multiple shared Unleash DB servers.
 
 ifdef::add-copy-button-to-env-var[]
@@ -161,6 +193,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-unleash_quarkus.unleash.url]]`link:#quarkus-unleash_quarkus.unleash.url[quarkus.unleash.url]`
+
 
 [.description]
 --
@@ -178,6 +211,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-unleash_quarkus.unleash.application]]`link:#quarkus-unleash_quarkus.unleash.application[quarkus.unleash.application]`
 
+
 [.description]
 --
 Application name
@@ -193,6 +227,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-unleash_quarkus.unleash.project]]`link:#quarkus-unleash_quarkus.unleash.project[quarkus.unleash.project]`
+
 
 [.description]
 --
@@ -210,6 +245,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-unleash_quarkus.unleash.instance-id]]`link:#quarkus-unleash_quarkus.unleash.instance-id[quarkus.unleash.instance-id]`
 
+
 [.description]
 --
 Instance ID.
@@ -225,6 +261,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-unleash_quarkus.unleash.disable-metrics]]`link:#quarkus-unleash_quarkus.unleash.disable-metrics[quarkus.unleash.disable-metrics]`
+
 
 [.description]
 --
@@ -242,6 +279,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-unleash_quarkus.unleash.token]]`link:#quarkus-unleash_quarkus.unleash.token[quarkus.unleash.token]`
 
+
 [.description]
 --
 Application Unleash token
@@ -257,6 +295,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-unleash_quarkus.unleash.environment]]`link:#quarkus-unleash_quarkus.unleash.environment[quarkus.unleash.environment]`
+
 
 [.description]
 --
@@ -274,6 +313,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-unleash_quarkus.unleash.fetch-toggles-interval]]`link:#quarkus-unleash_quarkus.unleash.fetch-toggles-interval[quarkus.unleash.fetch-toggles-interval]`
 
+
 [.description]
 --
 Fetch toggles interval
@@ -289,6 +329,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-unleash_quarkus.unleash.send-metrics-interval]]`link:#quarkus-unleash_quarkus.unleash.send-metrics-interval[quarkus.unleash.send-metrics-interval]`
+
 
 [.description]
 --
@@ -306,6 +347,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-unleash_quarkus.unleash.backup-file]]`link:#quarkus-unleash_quarkus.unleash.backup-file[quarkus.unleash.backup-file]`
 
+
 [.description]
 --
 Backup file
@@ -322,6 +364,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-unleash_quarkus.unleash.synchronous-fetch-on-initialisation]]`link:#quarkus-unleash_quarkus.unleash.synchronous-fetch-on-initialisation[quarkus.unleash.synchronous-fetch-on-initialisation]`
 
+
 [.description]
 --
 A synchronous fetch on initialisation
@@ -337,6 +380,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-unleash_quarkus.unleash.enable-proxy-authentication-by-jvm-properties]]`link:#quarkus-unleash_quarkus.unleash.enable-proxy-authentication-by-jvm-properties[quarkus.unleash.enable-proxy-authentication-by-jvm-properties]`
+
 
 [.description]
 --

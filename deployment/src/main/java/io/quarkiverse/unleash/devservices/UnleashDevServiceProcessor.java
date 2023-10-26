@@ -8,7 +8,6 @@ import java.time.Duration;
 import java.util.*;
 import java.util.function.Supplier;
 
-import org.apiguardian.api.API;
 import org.jboss.logging.Logger;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
@@ -33,7 +32,7 @@ public class UnleashDevServiceProcessor {
 
     private static final Logger log = Logger.getLogger(UnleashDevServiceProcessor.class);
 
-    private static final String DEFAULT_DOCKER_IMAGE = "unleashorg/unleash-server:4.22.0";
+    private static final String DEFAULT_DOCKER_IMAGE = "unleashorg/unleash-server:5.5.7";
     private static final String IMPORT_FILE_PATH = "/tmp/unleash-import-file.yml";
     public static final String PROP_UNLEASH_URL = "quarkus.unleash.url";
     private static final String DEV_SERVICE_LABEL = "quarkus-dev-service-unleash";
@@ -150,7 +149,10 @@ public class UnleashDevServiceProcessor {
                     dbSettings);
             timeout.ifPresent(container::withStartupTimeout);
 
-            //            container.withLogConsumer(ContainerLogger.create(config.serviceName));
+            // enabled or disable container logs
+            if (config.log) {
+                container.withLogConsumer(ContainerLogger.create(config.serviceName));
+            }
 
             // enable test-container reuse
             if (config.reuse) {
@@ -218,6 +220,8 @@ public class UnleashDevServiceProcessor {
 
         private final boolean reuse;
 
+        private final boolean log;
+
         public UnleashDevServiceCfg(UnleashDevServicesConfig config) {
             this.devServicesEnabled = config.enabled;
             this.imageName = config.imageName.orElse(DEFAULT_DOCKER_IMAGE);
@@ -226,6 +230,7 @@ public class UnleashDevServiceProcessor {
             this.serviceName = config.serviceName;
             this.reuse = config.reuse;
             this.importFile = config.importFile.orElse(null);
+            this.log = config.log;
         }
 
         @Override
@@ -318,35 +323,6 @@ public class UnleashDevServiceProcessor {
                 return fixedExposedPort;
             }
             return super.getFirstMappedPort();
-        }
-
-        /**
-         * Returns an address accessible from within the container's network for the given port.
-         *
-         * @param port the target port
-         * @return internally accessible address for {@code port}
-         */
-        public String getInternalAddress(final int port) {
-            return getInternalHost() + ":" + port;
-        }
-
-        /**
-         * Returns a hostname which is accessible from a host that is within the same docker network as
-         * this node. It will attempt to return the last added network alias it finds, and if there is
-         * none, will return the container name. The network alias is preferable as it typically conveys
-         * more meaning than container name, which is often randomly generated.
-         *
-         * @return the hostname of this node as visible from a host within the same docker network
-         */
-        @API(status = API.Status.EXPERIMENTAL)
-        public String getInternalHost() {
-            final GenericContainer<?> container = self();
-            final List<String> aliases = container.getNetworkAliases();
-            if (aliases.isEmpty()) {
-                return container.getContainerInfo().getName();
-            }
-
-            return aliases.get(aliases.size() - 1);
         }
 
         public String getUnleashHost() {

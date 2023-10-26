@@ -30,6 +30,7 @@ import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageConfigBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
 import io.quarkus.deployment.pkg.steps.NativeBuild;
 import io.quarkus.gizmo.*;
 import io.quarkus.runtime.ApplicationConfig;
@@ -54,7 +55,8 @@ public class UnleashProcessor {
     }
 
     @BuildStep(onlyIf = NativeBuild.class)
-    void nativeImageConfiguration(BuildProducer<ReflectiveClassBuildItem> reflective) {
+    void nativeImageConfiguration(BuildProducer<ReflectiveClassBuildItem> reflective,
+            BuildProducer<ServiceProviderBuildItem> services) {
         reflective.produce(ReflectiveClassBuildItem.builder(
                 io.getunleash.metric.ClientRegistration.class.getName(),
                 io.getunleash.metric.ClientMetrics.class.getName(),
@@ -71,6 +73,9 @@ public class UnleashProcessor {
                 .methods(true)
                 .fields(true)
                 .build());
+
+        services.produce(new ServiceProviderBuildItem("java.net.ContentHandlerFactory",
+                "sun.awt.www.content.MultimediaContentHandlers"));
     }
 
     @BuildStep
