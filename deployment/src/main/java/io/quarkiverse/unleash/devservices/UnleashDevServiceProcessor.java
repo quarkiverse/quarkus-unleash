@@ -32,7 +32,7 @@ public class UnleashDevServiceProcessor {
 
     private static final Logger log = Logger.getLogger(UnleashDevServiceProcessor.class);
 
-    private static final String DEFAULT_DOCKER_IMAGE = "unleashorg/unleash-server:5.5.7";
+    private static final String DEFAULT_DOCKER_IMAGE = "unleashorg/unleash-server:5.9.3";
     private static final String IMPORT_FILE_PATH = "/tmp/unleash-import-file.yml";
     public static final String PROP_UNLEASH_URL = "quarkus.unleash.url";
     private static final String DEV_SERVICE_LABEL = "quarkus-dev-service-unleash";
