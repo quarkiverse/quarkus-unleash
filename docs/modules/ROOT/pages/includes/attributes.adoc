@@ -1,5 +1,5 @@
-:project-version: 0.6.0
-:quarkus-version: 2.16.6.Final
+:project-version: 0.8.0
+:quarkus-version: 2.16.12.Final
 
 :quarkus-org-url: https://github.com/quarkusio
 :quarkus-base-url: {quarkus-org-url}/quarkus
