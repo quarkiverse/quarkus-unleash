@@ -9,7 +9,7 @@
   <groupId>io.quarkiverse.unleash</groupId>
   <artifactId>quarkus-unleash-parent</artifactId>
   <name>Quarkus - Unleash - Parent</name>
-  <version>999-SNAPSHOT</version>
+  <version>1.2.0</version>
   <packaging>pom</packaging>
   <properties>
     <unleash.version>9.2.0</unleash.version>
@@ -27,7 +27,7 @@
     <connection>scm:git:git@github.com:quarkiverse/quarkus-unleash.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-unleash.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-unleash</url>
-    <tag>HEAD</tag>
+    <tag>1.2.0</tag>
   </scm>
   <modules>
     <module>deployment</module>
