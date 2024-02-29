@@ -52,13 +52,13 @@ public class UnleashRuntimeTimeConfig {
     public Optional<String> environment = Optional.empty();
 
     /**
-     * Fetch toggles interval
+     * Fetch toggles interval (in seconds)
      */
     @ConfigItem(name = "fetch-toggles-interval", defaultValue = "10")
     public long fetchTogglesInterval = 10;
 
     /**
-     * Send metrics interval
+     * Send metrics interval (in seconds)
      */
     @ConfigItem(name = "send-metrics-interval", defaultValue = "60")
     public long sendMetricsInterval = 60;
