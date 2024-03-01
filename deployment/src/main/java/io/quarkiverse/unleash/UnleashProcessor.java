@@ -1,10 +1,13 @@
 package io.quarkiverse.unleash;
 
+import static io.quarkus.arc.deployment.ValidationPhaseBuildItem.ValidationErrorBuildItem;
 import static io.quarkus.deployment.annotations.ExecutionTime.RUNTIME_INIT;
 
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.enterprise.inject.Produces;
@@ -46,6 +49,9 @@ public class UnleashProcessor {
 
     public static final Set<DotName> IGNORE = Set.of(DN_VARIANT, DN_STRING);
     public static final DotName DN_FEATURE_VARIANT = DotName.createSimple(FeatureVariant.class);
+
+    private static final DotName DN_FEATURE_TOGGLE = DotName.createSimple(FeatureToggle.class);
+    private static final DotName DN_PRIMITIVE_BOOLEAN = DotName.createSimple(boolean.class);
 
     @BuildStep
     @Record(RUNTIME_INIT)
@@ -100,6 +106,33 @@ public class UnleashProcessor {
                 .addBeanClasses(UnleashService.class, FeatureToggle.class, FeatureToggleProducer.class,
                         UnleashResourceProducer.class, ToggleVariantProducer.class, ToggleVariantStringProducer.class)
                 .build();
+    }
+
+    @BuildStep
+    void validateFeatureToggleAnnotations(CombinedIndexBuildItem combinedIndex,
+            BuildProducer<ValidationErrorBuildItem> validationErrors) {
+        List<Throwable> throwables = new ArrayList<>();
+        for (AnnotationInstance annotation : combinedIndex.getIndex().getAnnotations(DN_FEATURE_TOGGLE)) {
+            AnnotationTarget target = annotation.target();
+            switch (target.kind()) {
+                case FIELD -> {
+                    if (DN_PRIMITIVE_BOOLEAN.equals(target.asField().type().name())) {
+                        ClassInfo declaringClass = target.asField().declaringClass();
+                        throwables.add(new BooleanFeatureToggleException(declaringClass));
+                    }
+                }
+                case METHOD_PARAMETER -> {
+                    if (DN_PRIMITIVE_BOOLEAN.equals(target.asMethodParameter().type().name())) {
+                        ClassInfo declaringClass = target.asMethodParameter().method().declaringClass();
+                        throwables.add(new BooleanFeatureToggleException(declaringClass));
+                    }
+                }
+                default -> {
+                    // No validation required for all other target kinds.
+                }
+            }
+        }
+        validationErrors.produce(new ValidationErrorBuildItem(throwables.toArray(new Throwable[0])));
     }
 
     @BuildStep
