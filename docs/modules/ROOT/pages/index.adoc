@@ -65,6 +65,12 @@ public class TestService {
 }
 ----
 
+[NOTE]
+====
+If the `@FeatureToggle` annotation is placed on a `boolean` field or method argument, an exception will be thrown at build time.
+`@FeatureToggle` should only be used with the `Instance<Boolean>` type.
+====
+
 === @FeatureVariant
 
 By using the `@FeatureVariant` annotation there is a shortcut to inject feature toggle
