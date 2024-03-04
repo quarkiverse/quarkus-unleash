@@ -15,12 +15,25 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
-import org.jboss.jandex.*;
+import org.jboss.jandex.AnnotationInstance;
+import org.jboss.jandex.AnnotationTarget;
+import org.jboss.jandex.ClassInfo;
+import org.jboss.jandex.DotName;
+import org.jboss.jandex.FieldInfo;
+import org.jboss.jandex.IndexView;
+import org.jboss.jandex.MethodParameterInfo;
+import org.jboss.jandex.ParameterizedType;
 import org.jboss.jandex.Type;
 
 import io.getunleash.Unleash;
 import io.getunleash.Variant;
-import io.quarkiverse.unleash.runtime.*;
+import io.quarkiverse.unleash.runtime.AbstractVariantProducer;
+import io.quarkiverse.unleash.runtime.FeatureToggleProducer;
+import io.quarkiverse.unleash.runtime.ToggleVariantProducer;
+import io.quarkiverse.unleash.runtime.ToggleVariantStringProducer;
+import io.quarkiverse.unleash.runtime.UnleashLifecycleManager;
+import io.quarkiverse.unleash.runtime.UnleashRecorder;
+import io.quarkiverse.unleash.runtime.UnleashResourceProducer;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanGizmoAdaptor;
@@ -115,22 +128,30 @@ public class UnleashProcessor {
     }
 
     @BuildStep
-    void validateFeatureToggleAnnotations(CombinedIndexBuildItem combinedIndex,
+    void validateAnnotations(CombinedIndexBuildItem combinedIndex,
             BuildProducer<ValidationErrorBuildItem> validationErrors) {
         List<Throwable> throwables = new ArrayList<>();
+
         for (AnnotationInstance annotation : combinedIndex.getIndex().getAnnotations(DN_FEATURE_TOGGLE)) {
             AnnotationTarget target = annotation.target();
+            String name = annotation.value("name").asString();
             switch (target.kind()) {
                 case FIELD -> {
+                    ClassInfo declaringClass = target.asField().declaringClass();
                     if (DN_PRIMITIVE_BOOLEAN.equals(target.asField().type().name())) {
-                        ClassInfo declaringClass = target.asField().declaringClass();
                         throwables.add(new BooleanFeatureToggleException(declaringClass));
+                    }
+                    if (name == null || name.isEmpty()) {
+                        throwables.add(new EmptyAnnotationNameException(declaringClass));
                     }
                 }
                 case METHOD_PARAMETER -> {
+                    ClassInfo declaringClass = target.asMethodParameter().method().declaringClass();
                     if (DN_PRIMITIVE_BOOLEAN.equals(target.asMethodParameter().type().name())) {
-                        ClassInfo declaringClass = target.asMethodParameter().method().declaringClass();
                         throwables.add(new BooleanFeatureToggleException(declaringClass));
+                    }
+                    if (name == null || name.isEmpty()) {
+                        throwables.add(new EmptyAnnotationNameException(declaringClass));
                     }
                 }
                 default -> {
@@ -138,6 +159,29 @@ public class UnleashProcessor {
                 }
             }
         }
+
+        for (AnnotationInstance annotation : combinedIndex.getIndex().getAnnotations(DN_FEATURE_VARIANT)) {
+            AnnotationTarget target = annotation.target();
+            String name = annotation.value("name").asString();
+            switch (target.kind()) {
+                case FIELD -> {
+                    if (name == null || name.isEmpty()) {
+                        ClassInfo declaringClass = target.asField().declaringClass();
+                        throwables.add(new EmptyAnnotationNameException(declaringClass));
+                    }
+                }
+                case METHOD_PARAMETER -> {
+                    if (name == null || name.isEmpty()) {
+                        ClassInfo declaringClass = target.asMethodParameter().method().declaringClass();
+                        throwables.add(new EmptyAnnotationNameException(declaringClass));
+                    }
+                }
+                default -> {
+                    // No validation required for all other target kinds.
+                }
+            }
+        }
+
         validationErrors.produce(new ValidationErrorBuildItem(throwables.toArray(new Throwable[0])));
     }
 

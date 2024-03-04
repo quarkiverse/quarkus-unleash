@@ -22,9 +22,6 @@ public class AbstractVariantProducer {
                 break;
             }
         }
-        if (ft == null || ft.name().isEmpty()) {
-            throw new IllegalStateException("No feature toggle name of the variant specified");
-        }
         return ft;
     }
 
