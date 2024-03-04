@@ -35,7 +35,7 @@ public class AbstractVariantProducer {
 
     protected String getVariantString(InjectionPoint injectionPoint, Unleash unleash) {
         Variant variant = getVariant(injectionPoint, unleash);
-        if (!variant.isEnabled()) {
+        if (variant == null || !variant.isEnabled()) {
             return null;
         }
         Optional<Payload> payload = variant.getPayload();
@@ -47,7 +47,7 @@ public class AbstractVariantProducer {
         FeatureVariant ft = getFeatureVariant(injectionPoint);
         Variant variant = unleash.getVariant(ft.name());
 
-        if (!variant.isEnabled()) {
+        if (variant == null || !variant.isEnabled()) {
             return null;
         }
         Optional<Payload> tmp = variant.getPayload();

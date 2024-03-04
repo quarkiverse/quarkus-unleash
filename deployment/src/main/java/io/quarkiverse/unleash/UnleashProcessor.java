@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
@@ -24,20 +25,23 @@ import io.quarkiverse.unleash.runtime.*;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanGizmoAdaptor;
+import io.quarkus.arc.deployment.SyntheticBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.ExtensionSslNativeSupportBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
-import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageConfigBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
 import io.quarkus.deployment.pkg.steps.NativeBuild;
-import io.quarkus.gizmo.*;
-import io.quarkus.runtime.ApplicationConfig;
-import io.quarkus.runtime.LaunchMode;
+import io.quarkus.gizmo.ClassCreator;
+import io.quarkus.gizmo.ClassOutput;
+import io.quarkus.gizmo.FieldCreator;
+import io.quarkus.gizmo.MethodCreator;
+import io.quarkus.gizmo.MethodDescriptor;
+import io.quarkus.gizmo.ResultHandle;
 import io.quarkus.runtime.util.HashUtil;
 
 public class UnleashProcessor {
@@ -55,9 +59,12 @@ public class UnleashProcessor {
 
     @BuildStep
     @Record(RUNTIME_INIT)
-    void configureRuntimeProperties(UnleashRecorder recorder, UnleashRuntimeTimeConfig runtimeConfig,
-            ApplicationConfig appConfig, LaunchModeBuildItem launchMode) {
-        recorder.initializeProducers(runtimeConfig, appConfig, launchMode.getLaunchMode() == LaunchMode.DEVELOPMENT);
+    SyntheticBeanBuildItem createUnleashSyntheticBean(UnleashRecorder unleashRecorder) {
+        return SyntheticBeanBuildItem.configure(Unleash.class)
+                .scope(ApplicationScoped.class)
+                .supplier(unleashRecorder.getSupplier())
+                .setRuntimeInit()
+                .done();
     }
 
     @BuildStep(onlyIf = NativeBuild.class)
@@ -103,7 +110,7 @@ public class UnleashProcessor {
     AdditionalBeanBuildItem additionalBeans() {
         return AdditionalBeanBuildItem.builder()
                 .setUnremovable()
-                .addBeanClasses(UnleashService.class, FeatureToggle.class, FeatureToggleProducer.class,
+                .addBeanClasses(UnleashLifecycleManager.class, FeatureToggle.class, FeatureToggleProducer.class,
                         UnleashResourceProducer.class, ToggleVariantProducer.class, ToggleVariantStringProducer.class)
                 .build();
     }

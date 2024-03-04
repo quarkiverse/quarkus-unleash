@@ -10,6 +10,12 @@ import io.quarkus.runtime.annotations.ConfigRoot;
 public class UnleashRuntimeTimeConfig {
 
     /**
+     * Whether or not the Unleash extension is active.
+     */
+    @ConfigItem(defaultValue = "true")
+    public boolean active;
+
+    /**
      * Unleash URL service endpoint
      */
     @ConfigItem(name = "url")
