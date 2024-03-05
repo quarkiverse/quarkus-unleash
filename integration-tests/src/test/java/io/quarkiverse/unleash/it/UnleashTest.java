@@ -65,6 +65,7 @@ public class UnleashTest {
         Assertions.assertTrue(flags.get("quarkus-unleash-test-enabled"));
         Assertions.assertTrue(flags.get("toggle"));
         Assertions.assertTrue(flags.get("default-true"));
+        Assertions.assertTrue(flags.get("toggle-from-constructor-injection"));
     }
 
     @Test
@@ -91,6 +92,8 @@ public class UnleashTest {
         Assertions.assertEquals("message", jsonType.get("text"));
         Assertions.assertEquals(1, jsonType.get("value"));
         Assertions.assertEquals(true, jsonType.get("enabled"));
+
+        Assertions.assertNotNull(flags.get("toggle-from-constructor-injection"));
     }
 
     @Test

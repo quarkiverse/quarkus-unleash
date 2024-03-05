@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -28,6 +29,9 @@ public class TestAnnoRestController {
     @FeatureToggle(name = "default-true", defaultValue = true)
     Instance<Boolean> defaultTrue;
 
+    @Inject
+    Bean bean;
+
     @GET
     public Response testAnnotation() {
         Map<String, Boolean> tmp = new HashMap<>();
@@ -35,6 +39,7 @@ public class TestAnnoRestController {
         tmp.put("quarkus-unleash-test-disabled", disabled.get());
         tmp.put("toggle", toggle.get());
         tmp.put("default-true", defaultTrue.get());
+        tmp.put("toggle-from-constructor-injection", bean.getToggle().get());
         return Response.ok(tmp).build();
     }
 }
