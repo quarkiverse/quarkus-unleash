@@ -192,6 +192,23 @@ endif::add-copy-button-to-env-var[]
 |`unleash-db`
 
 
+a| [[quarkus-unleash_quarkus-unleash-active]]`link:#quarkus-unleash_quarkus-unleash-active[quarkus.unleash.active]`
+
+
+[.description]
+--
+Whether or not the Unleash extension is active.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_ACTIVE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_ACTIVE+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
 a| [[quarkus-unleash_quarkus-unleash-url]]`link:#quarkus-unleash_quarkus-unleash-url[quarkus.unleash.url]`
 
 
