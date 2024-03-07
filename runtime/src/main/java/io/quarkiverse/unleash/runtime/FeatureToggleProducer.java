@@ -5,12 +5,10 @@ import java.lang.annotation.Annotation;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 import io.getunleash.Unleash;
 import io.quarkiverse.unleash.FeatureToggle;
 
-@Singleton
 public class FeatureToggleProducer {
 
     @Inject

@@ -14,7 +14,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 import org.jboss.jandex.*;
 import org.jboss.jandex.Type;
@@ -175,8 +174,6 @@ public class UnleashProcessor {
                 .className("io.quarkiverse.unleash.runtime.ToggleVariantObjectProducer")
                 .superClass(AbstractVariantProducer.class.getName())
                 .build()) {
-
-            classCreator.addAnnotation(Singleton.class);
 
             FieldCreator unleash = classCreator
                     .getFieldCreator("unleash", Unleash.class.getName())
