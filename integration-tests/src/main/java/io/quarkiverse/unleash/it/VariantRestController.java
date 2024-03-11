@@ -41,6 +41,9 @@ public class VariantRestController {
     @Inject
     Unleash unleash;
 
+    @Inject
+    Bean bean;
+
     @GET
     public Response variants() {
         Map<String, Object> tmp = new HashMap<>();
@@ -50,6 +53,7 @@ public class VariantRestController {
         tmp.put("notFound", notFound.get());
         tmp.put("found", found.get());
         tmp.put("toggle", unleash.getVariant("toggle", io.getunleash.Variant.DISABLED_VARIANT));
+        tmp.put("toggle-from-constructor-injection", bean.getVariant().get());
         return Response.ok(tmp).build();
     }
 

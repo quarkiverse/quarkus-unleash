@@ -151,9 +151,26 @@ public class UnleashProcessor {
         Set<DotName> names = new HashSet<>();
 
         for (AnnotationInstance ano : ais) {
-            FieldInfo field = ano.target().asField();
 
-            Type type = field.type();
+            Type type;
+            switch (ano.target().kind()) {
+                case FIELD -> {
+                    FieldInfo field = ano.target().asField();
+                    type = field.type();
+                }
+                case METHOD_PARAMETER -> {
+                    MethodParameterInfo methodParameter = ano.target().asMethodParameter();
+                    type = methodParameter.type();
+                }
+                default -> {
+                    /*
+                     * @FeatureVariant is allowed on methods because of the associated producer.
+                     * When it is used that way, it shouldn't lead to bytecode generation in the current build step.
+                     */
+                    continue;
+                }
+            }
+
             ParameterizedType pt = type.asParameterizedType();
             Type vt = pt.arguments().get(0);
 
