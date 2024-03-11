@@ -9,7 +9,6 @@ import io.quarkiverse.unleash.UnleashJsonMapper;
 import io.quarkus.arc.DefaultBean;
 import io.quarkus.arc.Unremovable;
 
-@Singleton
 public class UnleashResourceProducer {
 
     @Produces
