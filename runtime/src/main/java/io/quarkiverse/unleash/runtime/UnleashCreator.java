@@ -2,7 +2,11 @@ package io.quarkiverse.unleash.runtime;
 
 import io.getunleash.DefaultUnleash;
 import io.getunleash.Unleash;
+import io.getunleash.event.UnleashSubscriber;
 import io.getunleash.util.UnleashConfig;
+import io.quarkus.arc.Arc;
+import io.quarkus.arc.ArcContainer;
+import io.quarkus.arc.InstanceHandle;
 
 public class UnleashCreator {
 
@@ -26,6 +30,18 @@ public class UnleashCreator {
         }
         if (unleashRuntimeTimeConfig.disableMetrics) {
             builder.disableMetrics();
+        }
+
+        /*
+         * The Arc container will be null in tests when @InjectUnleash is used.
+         * TODO Make the Unleash client managed by CDI when @InjectUnleash is used.
+         */
+        ArcContainer arcContainer = Arc.container();
+        if (arcContainer != null) {
+            InstanceHandle<UnleashSubscriber> unleashSubscriber = arcContainer.instance(UnleashSubscriber.class);
+            if (unleashSubscriber.isAvailable()) {
+                builder.subscriber(unleashSubscriber.get());
+            }
         }
 
         return new DefaultUnleash(builder.build());

@@ -93,6 +93,57 @@ public class TestService {
 }
 ----
 
+=== Subscriber API
+
+This extension supports the https://docs.getunleash.io/reference/sdks/java#subscriber-api[Subscriber API] from the Unleash Client SDK for Java.
+It can be used by implementing the `UnleashSubscriber` interface as shown below.
+
+[source,java]
+----
+import static io.getunleash.repository.FeatureToggleResponse.Status.CHANGED;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import io.getunleash.FeatureToggle;
+import io.getunleash.event.UnleashSubscriber;
+import io.getunleash.repository.FeatureToggleResponse;
+import io.quarkus.arc.Unremovable;
+import io.quarkus.logging.Log;
+
+@ApplicationScoped // <1>
+@Unremovable // <2>
+public class ToggleChangedLogger implements UnleashSubscriber {
+
+    private static final Set<String> TOGGLE_NAMES = Set.of("my-toggle-1", "my-toggle-2");
+
+    private final Map<String, Boolean> toggleValues = new HashMap<>();
+
+    @Override
+    public void togglesFetched(FeatureToggleResponse toggleResponse) {
+        if (toggleResponse.getStatus() == CHANGED) {
+            for (String toggleName : TOGGLE_NAMES) {
+                FeatureToggle toggle = toggleResponse.getToggleCollection().getToggle(toggleName);
+                if (toggle != null) {
+                    Boolean previousValue = toggleValues.put(toggleName, toggle.isEnabled());
+                    if (previousValue == null || previousValue != toggle.isEnabled()) {
+                        String value = toggle.isEnabled() ? "enabled" : "disabled";
+                        Log.infof("Feature toggle %s was just %s", toggleName, value);
+                    }
+                } else {
+                    toggleValues.remove(toggleName);
+                }
+            }
+        }
+    }
+}
+----
+<1> The `UnleashSubscriber` implementation has to be a CDI bean.
+<2> The bean will be considered unused and will be automatically removed if it is not annotated with `@Unremovable`.
+
 === Testing
 To use the test extension, add this dependency to the project:
 
