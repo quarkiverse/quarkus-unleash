@@ -24,9 +24,6 @@ public class FeatureToggleProducer {
                 break;
             }
         }
-        if (ft == null || ft.name().isEmpty()) {
-            throw new IllegalStateException("No feature toggle name specified");
-        }
         return unleash.isEnabled(ft.name(), ft.defaultValue());
     }
 
