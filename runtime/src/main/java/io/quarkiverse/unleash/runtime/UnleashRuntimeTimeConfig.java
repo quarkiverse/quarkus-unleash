@@ -86,4 +86,10 @@ public class UnleashRuntimeTimeConfig {
      */
     @ConfigItem(name = "enable-proxy-authentication-by-jvm-properties", defaultValue = "false")
     public boolean enableProxyAuthenticationByJvmProperties = false;
+
+    /**
+     * If provided, the Unleash client will only fetch toggles whose name starts with the provided value.
+     */
+    @ConfigItem
+    public Optional<String> namePrefix = Optional.empty();
 }
