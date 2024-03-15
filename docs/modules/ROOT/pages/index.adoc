@@ -144,6 +144,33 @@ public class ToggleChangedLogger implements UnleashSubscriber {
 <1> The `UnleashSubscriber` implementation has to be a CDI bean.
 <2> The bean will be considered unused and will be automatically removed if it is not annotated with `@Unremovable`.
 
+=== Bootstrapping toggles from a JSON string
+
+This extension supports bootstrapping the Unleash feature toggles from a JSON string.
+This can be especially useful for applications deployed in ephemeral containers where the access to the file system is sometimes restricted.
+See the https://docs.getunleash.io/reference/sdks/java#bootstrapping[Unleash documentation] for more details about bootstrapping.
+
+[source,java]
+----
+import jakarta.enterprise.context.ApplicationScoped;
+
+import io.getunleash.repository.ToggleBootstrapProvider;
+import io.quarkus.arc.Unremovable;
+
+@ApplicationScoped // <1>
+@Unremovable // <2>
+public class TogglesBootstrapper implements ToggleBootstrapProvider {
+
+    @Override
+    public String read() {
+        // Return a JSON string in the same format returned from /api/client/features <3>
+    }
+}
+----
+<1> The `ToggleBootstrapProvider` implementation has to be a CDI bean.
+<2> The bean will be considered unused and will be automatically removed if it is not annotated with `@Unremovable`.
+<3> Examples can be found in the https://github.com/Unleash/unleash-client-java/tree/main/src/test/resources[Unleash Client SDK for Java repository]
+
 === Testing
 To use the test extension, add this dependency to the project:
 
