@@ -20,6 +20,7 @@ public class UnleashCreator {
         unleashRuntimeTimeConfig.environment.ifPresent(builder::environment);
         unleashRuntimeTimeConfig.projectName.ifPresent(builder::projectName);
         unleashRuntimeTimeConfig.backupFile.ifPresent(builder::backupFile);
+        unleashRuntimeTimeConfig.namePrefix.ifPresent(builder::namePrefix);
 
         builder.fetchTogglesInterval(unleashRuntimeTimeConfig.fetchTogglesInterval);
         builder.sendMetricsInterval(unleashRuntimeTimeConfig.sendMetricsInterval);
