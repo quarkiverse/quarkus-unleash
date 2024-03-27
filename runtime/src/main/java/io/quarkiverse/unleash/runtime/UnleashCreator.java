@@ -5,6 +5,7 @@ import io.getunleash.Unleash;
 import io.getunleash.event.UnleashSubscriber;
 import io.getunleash.repository.ToggleBootstrapProvider;
 import io.getunleash.util.UnleashConfig;
+import io.getunleash.util.UnleashScheduledExecutorImpl;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.ArcContainer;
 import io.quarkus.arc.InstanceHandle;
@@ -14,7 +15,12 @@ public class UnleashCreator {
     public static Unleash createUnleash(UnleashRuntimeTimeConfig unleashRuntimeTimeConfig, String name) {
         UnleashConfig.Builder builder = UnleashConfig.builder()
                 .unleashAPI(unleashRuntimeTimeConfig.url)
-                .appName(name);
+                .appName(name)
+                /*
+                 * This is needed to prevent UnleashConfig from using a static executor instance
+                 * which doesn't work well in dev mode when Quarkus is live reloaded.
+                 */
+                .scheduledExecutor(new UnleashScheduledExecutorImpl());
 
         unleashRuntimeTimeConfig.instanceId.ifPresent(builder::instanceId);
         unleashRuntimeTimeConfig.token.ifPresent(s -> builder.customHttpHeader("Authorization", s));
