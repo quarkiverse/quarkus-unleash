@@ -115,7 +115,6 @@ import io.quarkus.arc.Unremovable;
 import io.quarkus.logging.Log;
 
 @ApplicationScoped // <1>
-@Unremovable // <2>
 public class ToggleChangedLogger implements UnleashSubscriber {
 
     private static final Set<String> TOGGLE_NAMES = Set.of("my-toggle-1", "my-toggle-2");
@@ -142,7 +141,6 @@ public class ToggleChangedLogger implements UnleashSubscriber {
 }
 ----
 <1> The `UnleashSubscriber` implementation has to be a CDI bean.
-<2> The bean will be considered unused and will be automatically removed if it is not annotated with `@Unremovable`.
 
 === Bootstrapping toggles from a JSON string
 
