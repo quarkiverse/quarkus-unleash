@@ -21,6 +21,13 @@ features:
     stale: false
     createdAt: 2021-11-08T21:01:37.477Z
     lastSeenAt: null
+  - name: rollout
+    description: ''
+    type: release
+    project: default
+    stale: false
+    createdAt: 2021-11-08T21:01:37.477Z
+    lastSeenAt: null
 strategies: [ ]
 projects: [ ]
 tagTypes: [ ]
@@ -50,6 +57,21 @@ featureStrategies:
     strategyName: default
     parameters: { }
     constraints: [ ]
+    createdAt: 2021-11-08T21:01:37.486Z
+  - id: 1b65b714-e7fa-43b5-8cdb-6abdf1307b1e
+    featureName: rollout
+    projectId: default
+    environment: default
+    strategyName: flexibleRollout
+    parameters:
+      groupId: rollout
+      stickiness: default
+      rollout: 50
+    constraints:
+      - contextName: betaEnabled
+        operator: IN
+        values:
+        - "true"
     createdAt: 2021-11-08T21:01:37.486Z
 environments:
   - name: default
@@ -88,3 +110,7 @@ featureEnvironments:
         overrides: []
         stickiness: default
         weightType: variable
+  - enabled: true
+    featureName: rollout
+    environment: default
+    variants: []

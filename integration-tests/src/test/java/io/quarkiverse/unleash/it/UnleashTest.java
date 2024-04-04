@@ -3,11 +3,11 @@ package io.quarkiverse.unleash.it;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-import java.util.Map;
+import java.util.*;
 
 import org.junit.jupiter.api.*;
 
-import io.getunleash.Unleash;
+import io.getunleash.*;
 import io.quarkiverse.unleash.InjectUnleash;
 import io.quarkiverse.unleash.InjectUnleashAdmin;
 import io.quarkiverse.unleash.UnleashAdmin;
@@ -130,5 +130,47 @@ public class UnleashTest {
         admin.toggleOff("quarkus-unleash-test-disabled");
         admin.toggleOn("toggle");
 
+    }
+
+    @Test
+    public void testContext() {
+        Set<String> expected = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            var context = UnleashContext.builder()
+                    .userId("" + i)
+                    .environment("default")
+                    .addProperty("betaEnabled", "true")
+                    .build();
+            var enabled = client.isEnabled("rollout", context);
+            System.out.println("rollout: " + i + " value: " + enabled);
+            if (enabled)
+                expected.add("" + i);
+        }
+
+        Assertions.assertTrue(expected.size() > 2, "At least 3 expected");
+        Assertions.assertTrue(expected.size() < 8, "At most 8 expected");
+
+        for (int i = 0; i < 10; i++) {
+            testContext("" + i, expected.contains("" + i));
+        }
+    }
+
+    public void testContext(String userId, boolean expected) {
+
+        Response response = RestAssured.when()
+                .get("/context?betaEnabled=true&userId=" + userId)
+                .andReturn();
+
+        Assertions.assertEquals(200, response.statusCode());
+
+        Map<String, Object> flags = response.as(new TypeRef<Map<String, Object>>() {
+        });
+
+        Assertions.assertEquals("default", flags.get("request-environment"));
+        Assertions.assertEquals("default", flags.get("application-environment"));
+        Assertions.assertEquals(userId, flags.get("request-userId"));
+        Assertions.assertEquals(null, flags.get("application-userId"));
+        Assertions.assertEquals(false, flags.get("application"));
+        Assertions.assertEquals(expected, flags.get("request"));
     }
 }
