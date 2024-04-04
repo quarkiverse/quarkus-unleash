@@ -57,8 +57,7 @@ public class FeatureToggleProducer {
         context.getRemoteAddress().ifPresent(v -> sb.append("remoteAddress=").append(v).append(", "));
         context.getProperties().forEach((k, v) -> sb.append(k).append("=").append(v).append(", "));
         sb.setLength(sb.length() - 2);
-        if (length < sb.length())
-            sb.append(") ");
+        if (length < sb.length()) sb.append(")");
         LOGGER.debug(sb);
     }
 }

@@ -17,9 +17,6 @@ import io.quarkiverse.unleash.runtime.UnleashContextProvider;
 @Produces(MediaType.APPLICATION_JSON)
 public class ContextRestController {
 
-    @Inject
-    Unleash unleash;
-
     @FeatureToggle(name = "rollout")
     Instance<Boolean> feature;
 
@@ -48,11 +45,5 @@ public class ContextRestController {
         tmp.put("application-environment", appContext.getEnvironment().orElse(null));
         tmp.put("application-userId", appContext.getUserId().orElse(null));
         return tmp;
-    }
-
-    @GET
-    @Path("{name}")
-    public Boolean get(@PathParam("name") String name) {
-        return unleash.isEnabled(name, false);
     }
 }

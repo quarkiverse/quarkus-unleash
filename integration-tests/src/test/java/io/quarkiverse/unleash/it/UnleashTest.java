@@ -136,15 +136,14 @@ public class UnleashTest {
     public void testContext() {
         Set<String> expected = new HashSet<>();
         for (int i = 0; i < 10; i++) {
-            var context = UnleashContext.builder()
+            UnleashContext context = UnleashContext.builder()
                     .userId("" + i)
                     .environment("default")
                     .addProperty("betaEnabled", "true")
                     .build();
-            var enabled = client.isEnabled("rollout", context);
+            boolean enabled = client.isEnabled("rollout", context);
             System.out.println("rollout: " + i + " value: " + enabled);
-            if (enabled)
-                expected.add("" + i);
+            if (enabled) expected.add("" + i);
         }
 
         Assertions.assertTrue(expected.size() > 2, "At least 3 expected");
