@@ -28,13 +28,7 @@ import org.jboss.jandex.Type;
 import io.getunleash.Unleash;
 import io.getunleash.Variant;
 import io.getunleash.event.UnleashSubscriber;
-import io.quarkiverse.unleash.runtime.AbstractVariantProducer;
-import io.quarkiverse.unleash.runtime.FeatureToggleProducer;
-import io.quarkiverse.unleash.runtime.ToggleVariantProducer;
-import io.quarkiverse.unleash.runtime.ToggleVariantStringProducer;
-import io.quarkiverse.unleash.runtime.UnleashLifecycleManager;
-import io.quarkiverse.unleash.runtime.UnleashRecorder;
-import io.quarkiverse.unleash.runtime.UnleashResourceProducer;
+import io.quarkiverse.unleash.runtime.*;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanGizmoAdaptor;
@@ -125,7 +119,7 @@ public class UnleashProcessor {
                 .setUnremovable()
                 .addBeanClasses(UnleashLifecycleManager.class, FeatureToggle.class, FeatureToggleProducer.class,
                         UnleashResourceProducer.class, ToggleVariantProducer.class, ToggleVariantStringProducer.class,
-                        UnleashSubscriber.class)
+                        UnleashSubscriber.class, UnleashContextProvider.class, UnleashContextProducer.class)
                 .build();
     }
 

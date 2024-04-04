@@ -29,7 +29,7 @@ public class UnleashRecorder {
                 @Override
                 public Unleash get() {
                     Unleash unleash = UnleashCreator.createUnleash(unleashRuntimeConfig.getValue(), app);
-                    LOGGER.infof("Unleash client application '{}' fetch feature toggle names: {}", app,
+                    LOGGER.infof("Unleash client application '%s' fetch feature toggle names: %s", app,
                             unleash.more().getFeatureToggleNames());
                     return unleash;
                 }
