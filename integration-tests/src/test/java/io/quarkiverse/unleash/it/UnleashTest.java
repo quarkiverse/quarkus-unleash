@@ -169,7 +169,7 @@ public class UnleashTest {
         Assertions.assertEquals("default", flags.get("request-environment"));
         Assertions.assertEquals("default", flags.get("application-environment"));
         Assertions.assertEquals(userId, flags.get("request-userId"));
-        Assertions.assertEquals(null, flags.get("application-userId"));
+        Assertions.assertNull(flags.get("application-userId"));
         Assertions.assertEquals(false, flags.get("application"));
         Assertions.assertEquals(expected, flags.get("request"));
     }
