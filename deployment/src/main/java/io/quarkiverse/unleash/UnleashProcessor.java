@@ -119,7 +119,7 @@ public class UnleashProcessor {
                 .setUnremovable()
                 .addBeanClasses(UnleashLifecycleManager.class, FeatureToggle.class, FeatureToggleProducer.class,
                         UnleashResourceProducer.class, ToggleVariantProducer.class, ToggleVariantStringProducer.class,
-                        UnleashSubscriber.class, UnleashContextProvider.class, UnleashContextProducer.class)
+                        UnleashSubscriber.class, QuarkusUnleashContextProvider.class, UnleashContextProducer.class)
                 .build();
     }
 

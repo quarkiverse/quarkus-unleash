@@ -11,7 +11,7 @@ import io.getunleash.UnleashContext;
 public class UnleashContextProducer {
 
     @Inject
-    UnleashContextProvider provider;
+    QuarkusUnleashContextProvider provider;
 
     private List<UnleashContextCustomizer> requestCustomizers;
 

@@ -1,7 +1,6 @@
 package io.quarkiverse.unleash.runtime;
 
-import io.getunleash.DefaultUnleash;
-import io.getunleash.Unleash;
+import io.getunleash.*;
 import io.getunleash.event.UnleashSubscriber;
 import io.getunleash.repository.ToggleBootstrapProvider;
 import io.getunleash.util.UnleashConfig;
@@ -56,6 +55,12 @@ public class UnleashCreator {
                     .instance(ToggleBootstrapProvider.class);
             if (toggleBootstrapProvider.isAvailable()) {
                 builder.toggleBootstrapProvider(toggleBootstrapProvider.get());
+            }
+
+            InstanceHandle<UnleashContextProvider> contextProvider = arcContainer
+                    .instance(UnleashContextProvider.class);
+            if (contextProvider.isAvailable()) {
+                builder.unleashContextProvider(contextProvider.get());
             }
         }
 

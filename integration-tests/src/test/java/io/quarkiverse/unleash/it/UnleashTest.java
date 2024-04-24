@@ -143,7 +143,8 @@ public class UnleashTest {
                     .build();
             boolean enabled = client.isEnabled("rollout", context);
             System.out.println("rollout: " + i + " value: " + enabled);
-            if (enabled) expected.add("" + i);
+            if (enabled)
+                expected.add("" + i);
         }
 
         Assertions.assertTrue(expected.size() > 2, "At least 3 expected");

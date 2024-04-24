@@ -3,7 +3,6 @@ package io.quarkiverse.unleash.it;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import jakarta.enterprise.context.*;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -11,7 +10,7 @@ import jakarta.ws.rs.core.*;
 
 import io.getunleash.*;
 import io.quarkiverse.unleash.FeatureToggle;
-import io.quarkiverse.unleash.runtime.UnleashContextProvider;
+import io.quarkiverse.unleash.runtime.QuarkusUnleashContextProvider;
 
 @Path("context")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,7 +20,7 @@ public class ContextRestController {
     Instance<Boolean> feature;
 
     @Inject
-    UnleashContextProvider contextProvider;
+    QuarkusUnleashContextProvider contextProvider;
 
     @Inject
     UnleashContext context;
@@ -39,7 +38,7 @@ public class ContextRestController {
     }
 
     private Map<String, Object> getApplicationFlags() {
-        UnleashContext appContext = contextProvider.get();
+        UnleashContext appContext = contextProvider.getContext();
         Map<String, Object> tmp = new HashMap<>();
         tmp.put("application", feature.get());
         tmp.put("application-environment", appContext.getEnvironment().orElse(null));

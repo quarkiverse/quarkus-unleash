@@ -6,11 +6,11 @@ import jakarta.enterprise.context.*;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.*;
 
-import io.getunleash.UnleashContext;
-import io.quarkus.arc.Arc;
+import io.getunleash.*;
+import io.quarkus.arc.*;
 
 @ApplicationScoped
-public class UnleashContextProvider {
+public class QuarkusUnleashContextProvider implements UnleashContextProvider {
 
     private UnleashContext applicationContext;
 
@@ -36,7 +36,8 @@ public class UnleashContextProvider {
         return requestContext;
     }
 
-    public UnleashContext get() {
+    @Override
+    public UnleashContext getContext() {
         if (Arc.container().requestContext().isActive()) {
             return getRequestContext();
         } else {
