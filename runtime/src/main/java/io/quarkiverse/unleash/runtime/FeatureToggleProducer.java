@@ -2,7 +2,7 @@ package io.quarkiverse.unleash.runtime;
 
 import java.lang.annotation.Annotation;
 
-import jakarta.enterprise.inject.*;
+import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
@@ -16,7 +16,7 @@ public class FeatureToggleProducer {
 
     @Produces
     @FeatureToggle(name = "ignored")
-    boolean getRequestFeatureToggle(InjectionPoint injectionPoint) {
+    boolean getFeatureToggle(InjectionPoint injectionPoint) {
         FeatureToggle ft = null;
         for (Annotation qualifier : injectionPoint.getQualifiers()) {
             if (qualifier.annotationType().equals(FeatureToggle.class)) {
@@ -26,4 +26,5 @@ public class FeatureToggleProducer {
         }
         return unleash.isEnabled(ft.name(), ft.defaultValue());
     }
+
 }
