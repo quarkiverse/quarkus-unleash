@@ -1,17 +1,19 @@
 package io.quarkiverse.unleash;
 
 import io.quarkiverse.unleash.devservices.UnleashDevServicesConfig;
-import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithName;
 
-@ConfigRoot(name = "unleash", phase = ConfigPhase.BUILD_TIME)
-public class UnleashBuildTimeConfig {
+@ConfigRoot(phase = ConfigPhase.BUILD_TIME)
+@ConfigMapping(prefix = "quarkus.unleash")
+public interface UnleashBuildTimeConfig {
 
     /**
      * Default Dev services configuration.
      */
-    @ConfigItem(name = "devservices")
-    public UnleashDevServicesConfig devService;
+    @WithName("devservices")
+    UnleashDevServicesConfig devService();
 
 }

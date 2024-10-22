@@ -55,18 +55,81 @@ public class UnleashTestResource implements QuarkusTestResourceLifecycleManager,
 
             // unleash client
             Config appConfig = ConfigProvider.getConfig();
-            UnleashRuntimeTimeConfig config = new UnleashRuntimeTimeConfig();
-            config.url = url;
-            config.appName = Optional.of("quarkus-unleash-test");
-            config.projectName = appConfig.getOptionalValue("quarkus.unleash.project", String.class);
-            config.environment = appConfig.getOptionalValue("quarkus.unleash.environment", String.class);
-            config.instanceId = Optional.of("quarkus-unleash-test-" + UUID.randomUUID());
-            config.fetchTogglesInterval = appConfig
-                    .getOptionalValue("quarkus.unleash.fetch-toggles-interval", Long.class)
-                    .orElse(2L);
-            config.disableMetrics = true;
-            config.synchronousFetchOnInitialisation = true;
-            CLIENT = UnleashCreator.createUnleash(config, "quarkus-unleash-test");
+            UnleashRuntimeTimeConfig configImpl = new UnleashRuntimeTimeConfig() {
+                @Override
+                public boolean active() {
+                    return false;
+                }
+
+                @Override
+                public String url() {
+                    return url;
+                }
+
+                @Override
+                public Optional<String> appName() {
+                    return Optional.of("quarkus-unleash-test");
+                }
+
+                @Override
+                public Optional<String> projectName() {
+                    return appConfig.getOptionalValue("quarkus.unleash.project", String.class);
+                }
+
+                @Override
+                public Optional<String> instanceId() {
+                    return Optional.of("quarkus-unleash-test-" + UUID.randomUUID());
+                }
+
+                @Override
+                public boolean disableMetrics() {
+                    return true;
+                }
+
+                @Override
+                public Optional<String> token() {
+                    return Optional.empty();
+                }
+
+                @Override
+                public Optional<String> environment() {
+                    return Optional.empty();
+                }
+
+                @Override
+                public long fetchTogglesInterval() {
+                    return appConfig
+                            .getOptionalValue("quarkus.unleash.fetch-toggles-interval", Long.class)
+                            .orElse(2L);
+                }
+
+                @Override
+                public long sendMetricsInterval() {
+                    return 606066066666666666L;
+                }
+
+                @Override
+                public Optional<String> backupFile() {
+                    return Optional.empty();
+                }
+
+                @Override
+                public boolean synchronousFetchOnInitialisation() {
+                    return true;
+                }
+
+                @Override
+                public boolean enableProxyAuthenticationByJvmProperties() {
+                    return false;
+                }
+
+                @Override
+                public Optional<String> namePrefix() {
+                    return Optional.empty();
+                }
+            };
+
+            CLIENT = UnleashCreator.createUnleash(configImpl, "quarkus-unleash-test");
             log.info("Unleash test client fetch feature toggle names: {}", CLIENT.more().getFeatureToggleNames());
         }
     }

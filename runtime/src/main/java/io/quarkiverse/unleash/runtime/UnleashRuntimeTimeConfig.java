@@ -2,94 +2,104 @@ package io.quarkiverse.unleash.runtime;
 
 import java.util.Optional;
 
-import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 
-@ConfigRoot(name = "unleash", phase = ConfigPhase.RUN_TIME)
-public class UnleashRuntimeTimeConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+@ConfigMapping(prefix = "quarkus.unleash")
+public interface UnleashRuntimeTimeConfig {
 
     /**
      * Whether or not the Unleash extension is active.
      */
-    @ConfigItem(defaultValue = "true")
-    public boolean active;
+    @WithName("active")
+    @WithDefault("true")
+    boolean active();
 
     /**
      * Unleash URL service endpoint
      */
-    @ConfigItem(name = "url")
-    public String url;
+    @WithName("url")
+    String url();
 
     /**
      * Application name
      */
-    @ConfigItem(name = "application")
-    public Optional<String> appName = Optional.empty();
+    @WithName("application")
+    Optional<String> appName();
 
     /**
      * Project name
      */
-    @ConfigItem(name = "project")
-    public Optional<String> projectName = Optional.empty();
+
+    @WithName("project")
+    Optional<String> projectName();
 
     /**
      * Instance ID.
      */
-    @ConfigItem(name = "instance-id")
-    public Optional<String> instanceId = Optional.empty();
+
+    @WithName("instance-id")
+    Optional<String> instanceId();
 
     /**
      * Disable Unleash metrics
      */
-    @ConfigItem(name = "disable-metrics", defaultValue = "false")
-    public boolean disableMetrics = false;
+    @WithName("disable-metrics")
+    @WithDefault("false")
+    boolean disableMetrics();
 
     /**
      * Application Unleash token
      */
-    @ConfigItem(name = "token")
-    public Optional<String> token = Optional.empty();
+    @WithName("token")
+    Optional<String> token();
 
     /**
      * Application environment
      */
-    @ConfigItem(name = "environment")
-    public Optional<String> environment = Optional.empty();
+    @WithName("environment")
+    Optional<String> environment();
 
     /**
      * Fetch toggles interval (in seconds)
      */
-    @ConfigItem(name = "fetch-toggles-interval", defaultValue = "10")
-    public long fetchTogglesInterval = 10;
+    @WithName("fetch-toggles-interval")
+    @WithDefault("10")
+    long fetchTogglesInterval();
 
     /**
      * Send metrics interval (in seconds)
      */
-    @ConfigItem(name = "send-metrics-interval", defaultValue = "60")
-    public long sendMetricsInterval = 60;
+    @WithName("send-metrics-interval")
+    @WithDefault("60")
+    long sendMetricsInterval();
 
     /**
      * Backup file
      */
-    @ConfigItem(name = "backup-file")
-    public Optional<String> backupFile = Optional.empty();
+    @WithName("backup-file")
+    Optional<String> backupFile();
 
     /**
      * A synchronous fetch on initialisation
      */
-    @ConfigItem(name = "synchronous-fetch-on-initialisation", defaultValue = "false")
-    public boolean synchronousFetchOnInitialisation = false;
+    @WithName("synchronous-fetch-on-initialisation")
+    @WithDefault("false")
+    boolean synchronousFetchOnInitialisation();
 
     /**
      * Enable proxy authentication by JVM properties
      */
-    @ConfigItem(name = "enable-proxy-authentication-by-jvm-properties", defaultValue = "false")
-    public boolean enableProxyAuthenticationByJvmProperties = false;
+    @WithName("enable-proxy-authentication-by-jvm-properties")
+    @WithDefault("false")
+    boolean enableProxyAuthenticationByJvmProperties();
 
     /**
      * If provided, the Unleash client will only fetch toggles whose name starts with the provided value.
      */
-    @ConfigItem
-    public Optional<String> namePrefix = Optional.empty();
+    Optional<String> namePrefix();
 }

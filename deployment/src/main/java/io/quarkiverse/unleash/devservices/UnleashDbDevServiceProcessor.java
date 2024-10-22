@@ -175,7 +175,7 @@ public class UnleashDbDevServiceProcessor {
     }
 
     private UnleashDbDevServiceCfg getConfiguration(UnleashBuildTimeConfig cfg) {
-        UnleashDevServicesConfig devServicesConfig = cfg.devService;
+        UnleashDevServicesConfig devServicesConfig = cfg.devService();
         return new UnleashDbDevServiceCfg(devServicesConfig);
     }
 
@@ -189,12 +189,12 @@ public class UnleashDbDevServiceProcessor {
         private final boolean reuse;
 
         public UnleashDbDevServiceCfg(UnleashDevServicesConfig config) {
-            this.devServicesEnabled = config.enabled;
-            UnleashDevServicesConfig.UnleashDatabaseConfig tmp = config.db;
-            this.imageName = tmp.imageName;
-            this.serviceName = tmp.serviceName;
-            this.shared = config.shared;
-            this.reuse = config.reuse;
+            this.devServicesEnabled = config.enabled();
+            UnleashDevServicesConfig.UnleashDatabaseConfig tmp = config.db();
+            this.imageName = tmp.imageName();
+            this.serviceName = tmp.serviceName();
+            this.shared = config.shared();
+            this.reuse = config.reuse();
 
         }
 
