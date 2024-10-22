@@ -140,7 +140,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_DB_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --|string 
-|required icon:exclamation-circle[title=Configuration property is required]
+|`postgres`
 
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus.unleash.devservices.db.service-name]]`link:#quarkus-unleash_quarkus.unleash.devservices.db.service-name[quarkus.unleash.devservices.db.service-name]`
@@ -157,7 +157,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_UNLEASH_DEVSERVICES_DB_SERVICE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --|string 
-|required icon:exclamation-circle[title=Configuration property is required]
+|`unleash-db`
 
 
 a| [[quarkus-unleash_quarkus.unleash.url]]`link:#quarkus-unleash_quarkus.unleash.url[quarkus.unleash.url]`
