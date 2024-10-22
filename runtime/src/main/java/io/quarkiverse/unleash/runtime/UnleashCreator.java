@@ -14,7 +14,7 @@ public class UnleashCreator {
 
     public static Unleash createUnleash(UnleashRuntimeTimeConfig unleashRuntimeTimeConfig, String name) {
         UnleashConfig.Builder builder = UnleashConfig.builder()
-                .unleashAPI(unleashRuntimeTimeConfig.url)
+                .unleashAPI(unleashRuntimeTimeConfig.url())
                 .appName(name)
                 /*
                  * This is needed to prevent UnleashConfig from using a static executor instance
@@ -22,21 +22,21 @@ public class UnleashCreator {
                  */
                 .scheduledExecutor(new UnleashScheduledExecutorImpl());
 
-        unleashRuntimeTimeConfig.instanceId.ifPresent(builder::instanceId);
-        unleashRuntimeTimeConfig.token.ifPresent(s -> builder.customHttpHeader("Authorization", s));
-        unleashRuntimeTimeConfig.environment.ifPresent(builder::environment);
-        unleashRuntimeTimeConfig.projectName.ifPresent(builder::projectName);
-        unleashRuntimeTimeConfig.backupFile.ifPresent(builder::backupFile);
-        unleashRuntimeTimeConfig.namePrefix.ifPresent(builder::namePrefix);
+        unleashRuntimeTimeConfig.instanceId().ifPresent(builder::instanceId);
+        unleashRuntimeTimeConfig.token().ifPresent(s -> builder.customHttpHeader("Authorization", s));
+        unleashRuntimeTimeConfig.environment().ifPresent(builder::environment);
+        unleashRuntimeTimeConfig.projectName().ifPresent(builder::projectName);
+        unleashRuntimeTimeConfig.backupFile().ifPresent(builder::backupFile);
+        unleashRuntimeTimeConfig.namePrefix().ifPresent(builder::namePrefix);
 
-        builder.fetchTogglesInterval(unleashRuntimeTimeConfig.fetchTogglesInterval);
-        builder.sendMetricsInterval(unleashRuntimeTimeConfig.sendMetricsInterval);
-        builder.synchronousFetchOnInitialisation(unleashRuntimeTimeConfig.synchronousFetchOnInitialisation);
+        builder.fetchTogglesInterval(unleashRuntimeTimeConfig.fetchTogglesInterval());
+        builder.sendMetricsInterval(unleashRuntimeTimeConfig.sendMetricsInterval());
+        builder.synchronousFetchOnInitialisation(unleashRuntimeTimeConfig.synchronousFetchOnInitialisation());
 
-        if (unleashRuntimeTimeConfig.enableProxyAuthenticationByJvmProperties) {
+        if (unleashRuntimeTimeConfig.enableProxyAuthenticationByJvmProperties()) {
             builder.enableProxyAuthenticationByJvmProperties();
         }
-        if (unleashRuntimeTimeConfig.disableMetrics) {
+        if (unleashRuntimeTimeConfig.disableMetrics()) {
             builder.disableMetrics();
         }
 

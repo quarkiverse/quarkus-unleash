@@ -124,7 +124,7 @@ public class UnleashDevServiceProcessor {
             return null;
         }
 
-        if (!dockerStatusBuildItem.isDockerAvailable()) {
+        if (!dockerStatusBuildItem.isContainerRuntimeAvailable()) {
             log.warn(
                     "Docker isn't working, please configure the unleash URL property ("
                             + PROP_UNLEASH_URL + ").");
@@ -204,7 +204,7 @@ public class UnleashDevServiceProcessor {
     }
 
     private UnleashDevServiceCfg getConfiguration(UnleashBuildTimeConfig cfg) {
-        UnleashDevServicesConfig devServicesConfig = cfg.devService;
+        UnleashDevServicesConfig devServicesConfig = cfg.devService();
         return new UnleashDevServiceCfg(devServicesConfig);
     }
 
@@ -223,14 +223,14 @@ public class UnleashDevServiceProcessor {
         private final boolean log;
 
         public UnleashDevServiceCfg(UnleashDevServicesConfig config) {
-            this.devServicesEnabled = config.enabled;
-            this.imageName = config.imageName.orElse(DEFAULT_DOCKER_IMAGE);
-            this.fixedExposedPort = config.port.orElse(0);
-            this.shared = config.shared;
-            this.serviceName = config.serviceName;
-            this.reuse = config.reuse;
-            this.importFile = config.importFile.orElse(null);
-            this.log = config.log;
+            this.devServicesEnabled = config.enabled();
+            this.imageName = config.imageName().orElse(DEFAULT_DOCKER_IMAGE);
+            this.fixedExposedPort = config.port().orElse(0);
+            this.shared = config.shared();
+            this.serviceName = config.serviceName();
+            this.reuse = config.reuse();
+            this.importFile = config.importFile().orElse(null);
+            this.log = config.log();
         }
 
         @Override

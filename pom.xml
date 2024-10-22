@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
   <properties>
     <unleash.version>9.2.4</unleash.version>
-    <quarkus.version>3.12.2</quarkus.version>
+    <quarkus.version>3.15.1</quarkus.version>
     <testcontainers.version>1.20.2</testcontainers.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
@@ -66,6 +66,11 @@
         <plugin>
           <groupId>io.quarkus</groupId>
           <artifactId>quarkus-maven-plugin</artifactId>
+          <version>${quarkus.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-config-doc-maven-plugin</artifactId>
           <version>${quarkus.version}</version>
         </plugin>
         <plugin>

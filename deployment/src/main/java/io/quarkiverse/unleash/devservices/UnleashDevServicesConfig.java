@@ -3,11 +3,10 @@ package io.quarkiverse.unleash.devservices;
 import java.util.Optional;
 import java.util.OptionalInt;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 
-@ConfigGroup
-public class UnleashDevServicesConfig {
+public interface UnleashDevServicesConfig {
 
     /**
      * If DevServices has been explicitly enabled or disabled. DevServices is generally enabled
@@ -16,16 +15,17 @@ public class UnleashDevServicesConfig {
      * When DevServices is enabled Quarkus will attempt to automatically configure and start
      * a database when running in Dev or Test mode and when Docker is running.
      */
-    @ConfigItem(name = "enabled", defaultValue = "true")
-    public boolean enabled;
+    @WithName("enabled")
+    @WithDefault("true")
+    boolean enabled();
 
     /**
      * Optional fixed port the dev service will listen to.
      * <p>
      * If not defined, the port will be chosen randomly.
      */
-    @ConfigItem(name = "port")
-    public OptionalInt port;
+    @WithName("port")
+    OptionalInt port();
 
     /**
      * Indicates if the Unleash server managed by Quarkus Dev Services is shared.
@@ -38,8 +38,9 @@ public class UnleashDevServicesConfig {
      * <p>
      * Container sharing is only used in dev mode.
      */
-    @ConfigItem(name = "shared", defaultValue = "true")
-    public boolean shared;
+    @WithName("shared")
+    @WithDefault("true")
+    boolean shared();
 
     /**
      * The value of the {@code quarkus-dev-service-unleash} label attached to the started container.
@@ -51,20 +52,22 @@ public class UnleashDevServicesConfig {
      * <p>
      * This property is used when you need multiple shared Unleash servers.
      */
-    @ConfigItem(name = "service-name", defaultValue = "unleash")
-    public String serviceName;
+    @WithName("service-name")
+    @WithDefault("unleash")
+    String serviceName();
 
     /**
      * The container image name to use, for container based DevServices providers.
      */
-    @ConfigItem(name = "image-name")
-    public Optional<String> imageName;
+    @WithName("image-name")
+    Optional<String> imageName();
 
     /**
      * Enabled or disable log of the mock-server
      */
-    @ConfigItem(name = "log", defaultValue = "false")
-    public boolean log;
+    @WithName("log")
+    @WithDefault("false")
+    boolean log();
 
     /**
      * Helper to define the stop strategy for containers created by DevServices.
@@ -76,32 +79,33 @@ public class UnleashDevServicesConfig {
      *
      * @see <a href="https://www.testcontainers.org/features/configuration/">Testcontainers Configuration</a>.
      */
-    @ConfigItem(name = "reuse", defaultValue = "false")
-    public boolean reuse;
+    @WithName("reuse")
+    @WithDefault("false")
+    boolean reuse();
 
     /**
      * The import data from file during the start.
      */
-    @ConfigItem(name = "import-file")
-    public Optional<String> importFile;
+    @WithName("import-file")
+    Optional<String> importFile();
 
     /**
      * Unleash database dev service
      */
-    @ConfigItem(name = "db")
-    public UnleashDatabaseConfig db = new UnleashDatabaseConfig();
+    @WithName("db")
+    UnleashDatabaseConfig db();
 
     /**
      * Unleash database config
      */
-    @ConfigGroup
-    public static class UnleashDatabaseConfig {
+    interface UnleashDatabaseConfig {
 
         /**
          * The container image name to use, for unleash database.
          */
-        @ConfigItem(name = "image-name", defaultValue = "postgres:15.2")
-        public String imageName;
+        @WithName("image-name")
+        @WithDefault("postgres:15.2")
+        String imageName();
 
         /**
          * The value of the {@code quarkus-dev-service-unleash-db} label attached to the started container.
@@ -113,8 +117,9 @@ public class UnleashDevServicesConfig {
          * <p>
          * This property is used when you need multiple shared Unleash DB servers.
          */
-        @ConfigItem(name = "service-name", defaultValue = "unleash-db")
-        public String serviceName;
+        @WithName("service-name")
+        @WithDefault("unleash-db")
+        String serviceName();
 
     }
 }
