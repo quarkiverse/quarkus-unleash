@@ -14,7 +14,7 @@
   <properties>
     <unleash.version>9.2.4</unleash.version>
     <quarkus.version>3.15.1</quarkus.version>
-    <testcontainers.version>1.20.2</testcontainers.version>
+    <testcontainers.version>1.20.3</testcontainers.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
