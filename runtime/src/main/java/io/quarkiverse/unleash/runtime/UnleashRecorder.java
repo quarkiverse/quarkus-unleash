@@ -24,7 +24,7 @@ public class UnleashRecorder {
 
     public Supplier<Unleash> getSupplier() {
         if (unleashRuntimeConfig.getValue().active()) {
-            String app = unleashRuntimeConfig.getValue().appName().orElse(applicationConfig.name.orElse("default-app-name"));
+            String app = unleashRuntimeConfig.getValue().appName().orElse(applicationConfig.name().orElse("default-app-name"));
             return new Supplier<Unleash>() {
                 @Override
                 public Unleash get() {
