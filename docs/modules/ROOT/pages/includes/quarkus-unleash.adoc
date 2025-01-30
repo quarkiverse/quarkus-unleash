@@ -1,4 +1,3 @@
-:summaryTableId: quarkus-unleash_quarkus-unleash
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
@@ -9,6 +8,10 @@ h|Type
 h|Default
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-enabled]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-enabled[`quarkus.unleash.devservices.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -28,6 +31,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-port]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-port[`quarkus.unleash.devservices.port`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.port+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -47,6 +54,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-shared]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-shared[`quarkus.unleash.devservices.shared`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.shared+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -68,6 +79,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-service-name]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-service-name[`quarkus.unleash.devservices.service-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.service-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -87,6 +102,10 @@ endif::add-copy-button-to-env-var[]
 |`unleash`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-image-name]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-image-name[`quarkus.unleash.devservices.image-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.image-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -104,6 +123,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-log]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-log[`quarkus.unleash.devservices.log`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.log+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -121,6 +144,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-reuse]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-reuse[`quarkus.unleash.devservices.reuse`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.reuse+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -138,6 +165,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-import-file]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-import-file[`quarkus.unleash.devservices.import-file`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.import-file+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -155,6 +186,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-db-image-name]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-db-image-name[`quarkus.unleash.devservices.db.image-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.db.image-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -172,6 +207,10 @@ endif::add-copy-button-to-env-var[]
 |`postgres:15.2`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-unleash_quarkus-unleash-devservices-db-service-name]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-devservices-db-service-name[`quarkus.unleash.devservices.db.service-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.devservices.db.service-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -191,6 +230,10 @@ endif::add-copy-button-to-env-var[]
 |`unleash-db`
 
 a| [[quarkus-unleash_quarkus-unleash-active]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-active[`quarkus.unleash.active`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.active+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -208,6 +251,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[quarkus-unleash_quarkus-unleash-url]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-url[`quarkus.unleash.url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.url+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -225,6 +272,10 @@ endif::add-copy-button-to-env-var[]
 |required icon:exclamation-circle[title=Configuration property is required]
 
 a| [[quarkus-unleash_quarkus-unleash-application]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-application[`quarkus.unleash.application`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.application+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -242,6 +293,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-unleash_quarkus-unleash-project]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-project[`quarkus.unleash.project`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.project+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -259,6 +314,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-unleash_quarkus-unleash-instance-id]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-instance-id[`quarkus.unleash.instance-id`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.instance-id+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -276,6 +335,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-unleash_quarkus-unleash-disable-metrics]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-disable-metrics[`quarkus.unleash.disable-metrics`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.disable-metrics+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -293,6 +356,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-unleash_quarkus-unleash-token]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-token[`quarkus.unleash.token`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.token+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -310,6 +377,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-unleash_quarkus-unleash-environment]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-environment[`quarkus.unleash.environment`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.environment+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -327,6 +398,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-unleash_quarkus-unleash-fetch-toggles-interval]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-fetch-toggles-interval[`quarkus.unleash.fetch-toggles-interval`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.fetch-toggles-interval+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -344,6 +419,10 @@ endif::add-copy-button-to-env-var[]
 |`10`
 
 a| [[quarkus-unleash_quarkus-unleash-send-metrics-interval]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-send-metrics-interval[`quarkus.unleash.send-metrics-interval`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.send-metrics-interval+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -361,6 +440,10 @@ endif::add-copy-button-to-env-var[]
 |`60`
 
 a| [[quarkus-unleash_quarkus-unleash-backup-file]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-backup-file[`quarkus.unleash.backup-file`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.backup-file+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -378,6 +461,10 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-unleash_quarkus-unleash-synchronous-fetch-on-initialisation]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-synchronous-fetch-on-initialisation[`quarkus.unleash.synchronous-fetch-on-initialisation`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.synchronous-fetch-on-initialisation+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -395,6 +482,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-unleash_quarkus-unleash-enable-proxy-authentication-by-jvm-properties]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-enable-proxy-authentication-by-jvm-properties[`quarkus.unleash.enable-proxy-authentication-by-jvm-properties`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.enable-proxy-authentication-by-jvm-properties+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -412,6 +503,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-unleash_quarkus-unleash-name-prefix]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-name-prefix[`quarkus.unleash.name-prefix`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.name-prefix+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -430,5 +525,3 @@ endif::add-copy-button-to-env-var[]
 
 |===
 
-
-:!summaryTableId:
