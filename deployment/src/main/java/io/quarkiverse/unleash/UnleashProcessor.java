@@ -26,8 +26,8 @@ import org.jboss.jandex.ParameterizedType;
 import org.jboss.jandex.Type;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
 import io.getunleash.event.UnleashSubscriber;
+import io.getunleash.variant.Variant;
 import io.quarkiverse.unleash.runtime.AbstractVariantProducer;
 import io.quarkiverse.unleash.runtime.DefaultUnleashJsonMapper;
 import io.quarkiverse.unleash.runtime.FeatureToggleProducer;

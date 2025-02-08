@@ -6,11 +6,11 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 import io.getunleash.EvaluatedToggle;
-import io.getunleash.FeatureToggle;
+import io.getunleash.FeatureDefinition;
 import io.getunleash.MoreOperations;
 import io.getunleash.Unleash;
 import io.getunleash.UnleashContext;
-import io.getunleash.Variant;
+import io.getunleash.variant.Variant;
 
 public class NoOpUnleash implements Unleash {
 
@@ -34,21 +34,6 @@ public class NoOpUnleash implements Unleash {
     }
 
     @Override
-    public Variant deprecatedGetVariant(String toggleName, UnleashContext context) {
-        return null;
-    }
-
-    @Override
-    public Variant deprecatedGetVariant(String toggleName, UnleashContext context, Variant defaultValue) {
-        return defaultValue;
-    }
-
-    @Override
-    public List<String> getFeatureToggleNames() {
-        return Collections.emptyList();
-    }
-
-    @Override
     public MoreOperations more() {
         return more;
     }
@@ -61,7 +46,7 @@ public class NoOpUnleash implements Unleash {
         }
 
         @Override
-        public Optional<FeatureToggle> getFeatureToggleDefinition(String toggleName) {
+        public Optional<FeatureDefinition> getFeatureToggleDefinition(String toggleName) {
             return Optional.empty();
         }
 
@@ -73,14 +58,6 @@ public class NoOpUnleash implements Unleash {
         @Override
         public List<EvaluatedToggle> evaluateAllToggles(UnleashContext context) {
             return Collections.emptyList();
-        }
-
-        @Override
-        public void count(String toggleName, boolean enabled) {
-        }
-
-        @Override
-        public void countVariant(String toggleName, String variantName) {
         }
     };
 }

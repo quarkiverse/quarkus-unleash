@@ -6,8 +6,8 @@ import java.util.Optional;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
 import io.getunleash.variant.Payload;
+import io.getunleash.variant.Variant;
 import io.quarkiverse.unleash.FeatureVariant;
 import io.quarkiverse.unleash.UnleashJsonMapper;
 import io.quarkus.logging.Log;

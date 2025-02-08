@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
+import io.getunleash.variant.Variant;
 import io.quarkus.test.QuarkusUnitTest;
 
 public class NoOpUnleashTest {
