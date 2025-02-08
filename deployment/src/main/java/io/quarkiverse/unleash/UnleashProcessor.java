@@ -39,6 +39,7 @@ import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanBuildItem;
 import io.quarkus.arc.deployment.GeneratedBeanGizmoAdaptor;
 import io.quarkus.arc.deployment.SyntheticBeanBuildItem;
+import io.quarkus.arc.deployment.UnremovableBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.Record;
@@ -127,6 +128,11 @@ public class UnleashProcessor {
                         DefaultUnleashJsonMapper.class, ToggleVariantProducer.class, ToggleVariantStringProducer.class,
                         UnleashSubscriber.class)
                 .build();
+    }
+
+    @BuildStep
+    UnremovableBeanBuildItem unremovableBeans() {
+        return UnremovableBeanBuildItem.beanTypes(UnleashSubscriber.class);
     }
 
     @BuildStep
