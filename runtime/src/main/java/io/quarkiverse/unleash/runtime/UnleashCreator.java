@@ -1,5 +1,7 @@
 package io.quarkiverse.unleash.runtime;
 
+import org.jboss.logging.Logger;
+
 import io.getunleash.DefaultUnleash;
 import io.getunleash.Unleash;
 import io.getunleash.event.UnleashSubscriber;
@@ -11,6 +13,8 @@ import io.quarkus.arc.ArcContainer;
 import io.quarkus.arc.InstanceHandle;
 
 public class UnleashCreator {
+
+    private static final Logger LOGGER = Logger.getLogger(UnleashCreator.class);
 
     public static Unleash createUnleash(UnleashRuntimeTimeConfig unleashRuntimeTimeConfig, String name) {
         UnleashConfig.Builder builder = UnleashConfig.builder()
@@ -47,15 +51,21 @@ public class UnleashCreator {
         ArcContainer arcContainer = Arc.container();
         if (arcContainer != null) {
 
-            InstanceHandle<UnleashSubscriber> unleashSubscriber = arcContainer.instance(UnleashSubscriber.class);
-            if (unleashSubscriber.isAvailable()) {
-                builder.subscriber(unleashSubscriber.get());
+            try (InstanceHandle<UnleashSubscriber> unleashSubscriber = arcContainer.instance(UnleashSubscriber.class)) {
+                if (unleashSubscriber.isAvailable()) {
+                    LOGGER.debugf("Found UnleashSubscriber instance: %s",
+                            unleashSubscriber.getBean().getImplementationClass().getName());
+                    builder.subscriber(unleashSubscriber.get());
+                }
             }
 
-            InstanceHandle<ToggleBootstrapProvider> toggleBootstrapProvider = arcContainer
-                    .instance(ToggleBootstrapProvider.class);
-            if (toggleBootstrapProvider.isAvailable()) {
-                builder.toggleBootstrapProvider(toggleBootstrapProvider.get());
+            try (InstanceHandle<ToggleBootstrapProvider> toggleBootstrapProvider = arcContainer
+                    .instance(ToggleBootstrapProvider.class)) {
+                if (toggleBootstrapProvider.isAvailable()) {
+                    LOGGER.debugf("Found ToggleBootstrapProvider instance: %s",
+                            toggleBootstrapProvider.getBean().getImplementationClass().getName());
+                    builder.toggleBootstrapProvider(toggleBootstrapProvider.get());
+                }
             }
         }
 
