@@ -8,5 +8,6 @@ metadata:
   categories:
     - "feature management"
   status: "preview"
+  icon-url: "https://docs.getunleash.io/img/logo.svg"
   config:
     - "quarkus.unleash."
