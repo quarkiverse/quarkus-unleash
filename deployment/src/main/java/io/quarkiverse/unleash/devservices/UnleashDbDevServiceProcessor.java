@@ -21,7 +21,7 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.*;
 import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
 import io.quarkus.deployment.console.StartupLogCompressor;
-import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
+import io.quarkus.deployment.dev.devservices.DevServicesConfig;
 import io.quarkus.deployment.logging.LoggingSetupBuildItem;
 import io.quarkus.devservices.common.ConfigureUtil;
 import io.quarkus.devservices.common.ContainerAddress;
@@ -46,7 +46,7 @@ public class UnleashDbDevServiceProcessor {
     private static final ContainerLocator unleashContainerLocator = new ContainerLocator(DEV_SERVICE_LABEL,
             DEFAULT_UNLEASH_PORT);
 
-    @BuildStep(onlyIfNot = IsNormal.class, onlyIf = { GlobalDevServicesConfig.Enabled.class })
+    @BuildStep(onlyIfNot = IsNormal.class, onlyIf = { DevServicesConfig.Enabled.class })
     public DevServicesResultBuildItem startUnleashDbContainers(LaunchModeBuildItem launchMode,
             List<DevServicesSharedNetworkBuildItem> devServicesSharedNetworkBuildItem,
             UnleashBuildTimeConfig buildTimeConfig,
@@ -54,7 +54,7 @@ public class UnleashDbDevServiceProcessor {
             BuildProducer<UnleashDbDevServicesProviderBuildItem> startResultProducer,
             CuratedApplicationShutdownBuildItem closeBuildItem,
             DockerStatusBuildItem dockerStatusBuildItem,
-            LoggingSetupBuildItem loggingSetupBuildItem, GlobalDevServicesConfig devServicesConfig) {
+            LoggingSetupBuildItem loggingSetupBuildItem, DevServicesConfig devServicesConfig) {
 
         UnleashDbDevServiceCfg configuration = getConfiguration(buildTimeConfig);
 
@@ -73,7 +73,7 @@ public class UnleashDbDevServiceProcessor {
         try {
             devService = startContainer(dockerStatusBuildItem, configuration, launchMode,
                     !devServicesSharedNetworkBuildItem.isEmpty(),
-                    devServicesConfig.timeout);
+                    devServicesConfig.timeout());
             if (devService == null) {
                 compressor.closeAndDumpCaptured();
             } else {
