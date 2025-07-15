@@ -15,7 +15,7 @@ import jakarta.inject.Singleton;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import io.getunleash.Variant;
+import io.getunleash.variant.Variant;
 import io.quarkus.test.QuarkusUnitTest;
 
 public class EmptyAnnotationNameExceptionTest {

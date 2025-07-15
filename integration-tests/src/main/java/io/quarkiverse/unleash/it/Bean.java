@@ -3,7 +3,7 @@ package io.quarkiverse.unleash.it;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 
-import io.getunleash.Variant;
+import io.getunleash.variant.Variant;
 import io.quarkiverse.unleash.FeatureToggle;
 import io.quarkiverse.unleash.FeatureVariant;
 

@@ -5,7 +5,7 @@ import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
+import io.getunleash.variant.Variant;
 import io.quarkiverse.unleash.FeatureVariant;
 
 public class ToggleVariantProducer extends AbstractVariantProducer {
