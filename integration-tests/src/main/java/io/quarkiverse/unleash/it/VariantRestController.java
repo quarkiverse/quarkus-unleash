@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
+import io.getunleash.variant.Variant;
 import io.quarkiverse.unleash.FeatureVariant;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
@@ -52,7 +52,7 @@ public class VariantRestController {
         tmp.put("i-toggle", variant.get());
         tmp.put("notFound", notFound.get());
         tmp.put("found", found.get());
-        tmp.put("toggle", unleash.getVariant("toggle", io.getunleash.Variant.DISABLED_VARIANT));
+        tmp.put("toggle", unleash.getVariant("toggle", io.getunleash.variant.Variant.DISABLED_VARIANT));
         tmp.put("toggle-from-constructor-injection", bean.getVariant().get());
         return Response.ok(tmp).build();
     }

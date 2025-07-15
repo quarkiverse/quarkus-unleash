@@ -26,8 +26,8 @@ import org.jboss.jandex.ParameterizedType;
 import org.jboss.jandex.Type;
 
 import io.getunleash.Unleash;
-import io.getunleash.Variant;
 import io.getunleash.event.UnleashSubscriber;
+import io.getunleash.variant.Variant;
 import io.quarkiverse.unleash.runtime.AbstractVariantProducer;
 import io.quarkiverse.unleash.runtime.DefaultUnleashJsonMapper;
 import io.quarkiverse.unleash.runtime.FeatureToggleProducer;
@@ -87,15 +87,11 @@ public class UnleashProcessor {
         reflective.produce(ReflectiveClassBuildItem.builder(
                 io.getunleash.metric.ClientRegistration.class.getName(),
                 io.getunleash.metric.ClientMetrics.class.getName(),
-                io.getunleash.ActivationStrategy.class.getName(),
-                io.getunleash.Constraint.class.getName(),
-                io.getunleash.variant.VariantDefinition.class.getName(),
-                io.getunleash.variant.VariantOverride.class.getName(),
-                io.getunleash.Variant.class.getName(),
+                io.getunleash.variant.Variant.class.getName(),
                 io.getunleash.variant.Payload.class.getName(),
-                io.getunleash.Operator.class.getName(),
-                io.getunleash.FeatureToggle.class.getName(),
-                io.getunleash.repository.ToggleCollection.class.getName())
+                io.getunleash.FeatureDefinition.class.getName(),
+                io.getunleash.EvaluatedToggle.class.getName(),
+                io.getunleash.UnleashContext.class.getName())
                 .constructors(true)
                 .methods(true)
                 .fields(true)
@@ -115,8 +111,8 @@ public class UnleashProcessor {
     @BuildStep
     NativeImageConfigBuildItem buildNativeImage() {
         NativeImageConfigBuildItem.Builder builder = NativeImageConfigBuildItem.builder();
-        builder.addRuntimeInitializedClass(io.getunleash.strategy.GradualRolloutRandomStrategy.class.getName());
         builder.addRuntimeInitializedClass(io.getunleash.DefaultUnleash.class.getName());
+        builder.addRuntimeInitializedClass(io.getunleash.engine.UnleashEngine.class.getName());
         return builder.build();
     }
 
