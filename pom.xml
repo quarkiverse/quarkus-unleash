@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
   <properties>
     <unleash.version>11.0.2</unleash.version>
-    <quarkus.version>3.18.2</quarkus.version>
+    <quarkus.version>3.25.1</quarkus.version>
     <testcontainers.version>1.21.3</testcontainers.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
