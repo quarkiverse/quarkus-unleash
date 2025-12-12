@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <properties>
     <unleash.version>11.2.0</unleash.version>
+    <okhttp-eventsource.version>4.1.1</okhttp-eventsource.version>
     <quarkus.version>3.30.3</quarkus.version>
     <testcontainers.version>1.21.3</testcontainers.version>
     <maven.compiler.source>17</maven.compiler.source>

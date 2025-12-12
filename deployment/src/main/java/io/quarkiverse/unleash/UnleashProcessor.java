@@ -113,6 +113,8 @@ public class UnleashProcessor {
         NativeImageConfigBuildItem.Builder builder = NativeImageConfigBuildItem.builder();
         builder.addRuntimeInitializedClass(io.getunleash.DefaultUnleash.class.getName());
         builder.addRuntimeInitializedClass(io.getunleash.engine.UnleashEngine.class.getName());
+        // LaunchDarkly eventsource classes need runtime init due to SecureRandom usage
+        builder.addRuntimeInitializedClass("com.launchdarkly.eventsource.DefaultRetryDelayStrategy");
         return builder.build();
     }
 
