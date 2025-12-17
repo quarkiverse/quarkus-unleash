@@ -28,6 +28,12 @@
             <groupId>io.getunleash</groupId>
             <artifactId>unleash-client-java</artifactId>
         </dependency>
+        <!-- The following dependency is needed for the extension native build to succeed, starting with unleash-client-java 11.1.0 -->
+        <dependency>
+            <groupId>com.launchdarkly</groupId>
+            <artifactId>okhttp-eventsource</artifactId>
+            <version>${okhttp-eventsource.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.graalvm.sdk</groupId>
             <artifactId>graal-sdk</artifactId>
