@@ -99,6 +99,14 @@ public interface UnleashRuntimeTimeConfig {
     boolean enableProxyAuthenticationByJvmProperties();
 
     /**
+     * Disable Unleash polling. If used without `synchronous-fetch-on-initialisation`, will cause the client to never fetch
+     * toggles.
+     */
+    @WithName("disable-polling")
+    @WithDefault("false")
+    boolean disablePolling();
+
+    /**
      * If provided, the Unleash client will only fetch toggles whose name starts with the provided value.
      */
     Optional<String> namePrefix();

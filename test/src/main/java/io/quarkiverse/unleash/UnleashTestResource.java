@@ -119,6 +119,11 @@ public class UnleashTestResource implements QuarkusTestResourceLifecycleManager,
                 }
 
                 @Override
+                public boolean disablePolling() {
+                    return false;
+                }
+
+                @Override
                 public boolean enableProxyAuthenticationByJvmProperties() {
                     return false;
                 }
