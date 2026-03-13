@@ -502,6 +502,27 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++false+++`
 
+a| [[quarkus-unleash_quarkus-unleash-disable-polling]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-disable-polling[`quarkus.unleash.disable-polling`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.unleash.disable-polling+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Disable Unleash polling. If used without `synchronous-fetch-on-initialisation`, will cause the client to never fetch toggles.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_DISABLE_POLLING+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_UNLEASH_DISABLE_POLLING+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`+++false+++`
+
 a| [[quarkus-unleash_quarkus-unleash-name-prefix]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-name-prefix[`quarkus.unleash.name-prefix`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.unleash.name-prefix+++[]

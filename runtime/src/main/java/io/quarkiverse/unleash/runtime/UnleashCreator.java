@@ -43,6 +43,9 @@ public class UnleashCreator {
         if (unleashRuntimeTimeConfig.disableMetrics()) {
             builder.disableMetrics();
         }
+        if (unleashRuntimeTimeConfig.disablePolling()) {
+            builder.disablePolling();
+        }
 
         /*
          * The Arc container will be null in tests when @InjectUnleash is used.
