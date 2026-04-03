@@ -1,5 +1,6 @@
 package io.quarkiverse.unleash.runtime;
 
+import java.util.Map;
 import java.util.Optional;
 
 import io.quarkus.runtime.annotations.ConfigPhase;
@@ -110,4 +111,11 @@ public interface UnleashRuntimeTimeConfig {
      * If provided, the Unleash client will only fetch toggles whose name starts with the provided value.
      */
     Optional<String> namePrefix();
+
+    /**
+     * Custom HTTP headers to be sent with requests to Unleash server.
+     * Example: quarkus.unleash.custom-header.X-Custom-Header=value
+     */
+    @WithName("custom-header")
+    Map<String, String> customHeaders();
 }

@@ -132,6 +132,11 @@ public class UnleashTestResource implements QuarkusTestResourceLifecycleManager,
                 public Optional<String> namePrefix() {
                     return Optional.empty();
                 }
+
+                @Override
+                public Map<String, String> customHeaders() {
+                    return Map.of();
+                }
             };
 
             CLIENT = UnleashCreator.createUnleash(configImpl, "quarkus-unleash-test");
