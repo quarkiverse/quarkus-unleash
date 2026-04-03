@@ -1,5 +1,6 @@
 package io.quarkiverse.unleash.runtime;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -118,4 +119,28 @@ public interface UnleashRuntimeTimeConfig {
      */
     @WithName("custom-header")
     Map<String, String> customHeaders();
+
+    /**
+     * Custom HTTP headers as indexed properties. This allows for fully dynamic headers where both name and value can come
+     * from environment variables.
+     */
+    @WithName("custom-headers")
+    List<CustomHeader> customHeadersList();
+
+    /**
+     * Custom header configuration for indexed properties
+     */
+    interface CustomHeader {
+        /**
+         * The name of the custom HTTP header.
+         * Example: X-Api-Key or ${HEADER_NAME} to use an environment variable
+         */
+        String name();
+
+        /**
+         * The value of the custom HTTP header.
+         * Example: secret-value or ${HEADER_VALUE} to use an environment variable
+         */
+        String value();
+    }
 }
