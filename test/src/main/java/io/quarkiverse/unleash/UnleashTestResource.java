@@ -135,12 +135,7 @@ public class UnleashTestResource implements QuarkusTestResourceLifecycleManager,
                 }
 
                 @Override
-                public Map<String, String> customHeaders() {
-                    return Map.of();
-                }
-
-                @Override
-                public List<UnleashRuntimeTimeConfig.CustomHeader> customHeadersList() {
+                public List<UnleashRuntimeTimeConfig.CustomHeader> customHeaders() {
                     return List.of();
                 }
             };

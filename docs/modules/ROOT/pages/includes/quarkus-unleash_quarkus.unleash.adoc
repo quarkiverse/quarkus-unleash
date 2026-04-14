@@ -544,27 +544,6 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-unleash_quarkus-unleash-custom-header-custom-headers]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-custom-header-custom-headers[`quarkus.unleash.custom-header."custom-headers"`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.unleash.custom-header."custom-headers"+++[]
-endif::add-copy-button-to-config-props[]
-
-
-[.description]
---
-Custom HTTP headers to be sent with requests to Unleash server. Example: quarkus.unleash.custom-header.X-Custom-Header=value
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_UNLEASH_CUSTOM_HEADER__CUSTOM_HEADERS_+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_UNLEASH_CUSTOM_HEADER__CUSTOM_HEADERS_+++`
-endif::add-copy-button-to-env-var[]
---
-|Map<String,String>
-|
-
 a| [[quarkus-unleash_quarkus-unleash-custom-headers-name]] [.property-path]##link:#quarkus-unleash_quarkus-unleash-custom-headers-name[`quarkus.unleash.custom-headers.name`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.unleash.custom-headers.name+++[]

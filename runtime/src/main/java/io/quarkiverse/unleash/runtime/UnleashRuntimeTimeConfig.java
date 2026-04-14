@@ -1,7 +1,6 @@
 package io.quarkiverse.unleash.runtime;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import io.quarkus.runtime.annotations.ConfigPhase;
@@ -115,20 +114,15 @@ public interface UnleashRuntimeTimeConfig {
 
     /**
      * Custom HTTP headers to be sent with requests to Unleash server.
-     * Example: quarkus.unleash.custom-header.X-Custom-Header=value
-     */
-    @WithName("custom-header")
-    Map<String, String> customHeaders();
-
-    /**
-     * Custom HTTP headers as indexed properties. This allows for fully dynamic headers where both name and value can come
-     * from environment variables.
+     * Both header name and value can be static or come from environment variables.
+     * Example: quarkus.unleash.custom-headers[0].name=X-Api-Key
+     * quarkus.unleash.custom-headers[0].value=${SECRET}
      */
     @WithName("custom-headers")
-    List<CustomHeader> customHeadersList();
+    List<CustomHeader> customHeaders();
 
     /**
-     * Custom header configuration for indexed properties
+     * Custom header configuration
      */
     interface CustomHeader {
         /**

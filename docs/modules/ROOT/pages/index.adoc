@@ -34,21 +34,16 @@ quarkus.unleash.url=http://localhost:4242/api
 ==== Custom HTTP Headers
 
 You can add custom HTTP headers to requests sent to the Unleash server.
+Both the header name and value can be static or resolved from environment variables.
 
-Map-based approach (when header names are static):
 [source,properties]
 ----
-quarkus.unleash.custom-header.X-Custom-Header=value
-quarkus.unleash.custom-header.X-Api-Key=${SECRET}
-----
-
-Indexed approach (when both header name and value are dynamic):
-[source,properties]
-----
-quarkus.unleash.custom-headers[0].name=${HEADER_NAME}
-quarkus.unleash.custom-headers[0].value=${HEADER_VALUE}
-quarkus.unleash.custom-headers[1].name=X-Correlation-Id
-quarkus.unleash.custom-headers[1].value=${CORRELATION_ID}
+quarkus.unleash.custom-headers[0].name=X-Custom-Header
+quarkus.unleash.custom-headers[0].value=static-value
+quarkus.unleash.custom-headers[1].name=X-Api-Key
+quarkus.unleash.custom-headers[1].value=${SECRET}
+quarkus.unleash.custom-headers[2].name=${HEADER_NAME}
+quarkus.unleash.custom-headers[2].value=${HEADER_VALUE}
 ----
 
 Once you have configured the properties, you can start using an Unleash-client.
