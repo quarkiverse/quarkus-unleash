@@ -31,6 +31,21 @@ Assuming you have `Unleash` running on localhost:4242 you should add the followi
 quarkus.unleash.url=http://localhost:4242/api
 ----
 
+==== Custom HTTP Headers
+
+You can add custom HTTP headers to requests sent to the Unleash server.
+Both the header name and value can be static or resolved from environment variables.
+
+[source,properties]
+----
+quarkus.unleash.custom-headers[0].name=X-Custom-Header
+quarkus.unleash.custom-headers[0].value=static-value
+quarkus.unleash.custom-headers[1].name=X-Api-Key
+quarkus.unleash.custom-headers[1].value=${SECRET}
+quarkus.unleash.custom-headers[2].name=${HEADER_NAME}
+quarkus.unleash.custom-headers[2].value=${HEADER_VALUE}
+----
+
 Once you have configured the properties, you can start using an Unleash-client.
 
 [source,java]
