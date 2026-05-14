@@ -32,6 +32,7 @@ public class UnleashCreator {
         unleashRuntimeTimeConfig.projectName().ifPresent(builder::projectName);
         unleashRuntimeTimeConfig.backupFile().ifPresent(builder::backupFile);
         unleashRuntimeTimeConfig.namePrefix().ifPresent(builder::namePrefix);
+        unleashRuntimeTimeConfig.customHeaders().forEach(header -> builder.customHttpHeader(header.name(), header.value()));
 
         builder.fetchTogglesInterval(unleashRuntimeTimeConfig.fetchTogglesInterval());
         builder.sendMetricsInterval(unleashRuntimeTimeConfig.sendMetricsInterval());

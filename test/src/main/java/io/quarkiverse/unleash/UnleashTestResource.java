@@ -1,5 +1,6 @@
 package io.quarkiverse.unleash;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -131,6 +132,11 @@ public class UnleashTestResource implements QuarkusTestResourceLifecycleManager,
                 @Override
                 public Optional<String> namePrefix() {
                     return Optional.empty();
+                }
+
+                @Override
+                public List<UnleashRuntimeTimeConfig.CustomHeader> customHeaders() {
+                    return List.of();
                 }
             };
 
